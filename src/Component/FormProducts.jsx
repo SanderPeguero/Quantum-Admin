@@ -3,6 +3,8 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { Button } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 
 
 
@@ -28,7 +30,7 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
 
 
         <Box
-        
+
             component="form"
             sx={{
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
@@ -37,24 +39,13 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
                 flexDirection: 'column',
                 alignItems: 'center',
             }}
-            noValidate
             autoComplete="off"
         >
             <div>
                 <h1>Registros Productos</h1>
             </div>
-            <div>
-                <h1>{FechaModificacion}</h1>
-            </div>
 
-            <Box
-                sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}>
-
+            <Box  sx={{ mt: 1 }}>
                 <TextField
                     margin="normal"
                     required
@@ -69,18 +60,95 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
                         readOnly: true,
                     }}
                 />
-             
+
+                {/* Boton Buscar*/}
+                <Button>
+                    <SearchIcon></SearchIcon>
+                </Button>
+                <br />
+
                 <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="filled"
+                    label="Descripcion"
+                    name="Descripcion"
+                    autoComplete="Descripcion"
+                    autoFocus
+
+                />
+
+
+
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="filled-number"
+                    label="Costo"
+                    name="Costo"
+                    type="number"
+                    autoComplete="Descripcion"
+                    autoFocus
+
+                />
+
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="filled-number"
+                    label="Cantidad"
+                    name="Cantidad"
+                    type="number"
+                    autoComplete="Cantidad"
+                    autoFocus
+
+                />
+
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="filled-number"
+                    label="Precio"
+                    name="Precio"
+                    type="number"
+                    autoComplete="Precio"
+                    autoFocus
+
+                />
+
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="filled-number"
+                    label="Descuento %"
+                    name="Descuento %"
+                    type="number"
+                    autoComplete="Descuento"
+                    autoFocus
+
+                />
+
+
+
+                {/* <TextField
                     margin="normal"
                     required
                     fullWidth
                     id="filled-read-only-input"
                     label="Descripcion"
-                    name = "Descripcion"
+                    name="Descripcion"
                     defaultValue="Descripcion"
                     variant="filled"
-                />
-                <TextField
+                    autoComplete="Descripcion"
+                    autoFocus
+                /> */}
+                {/* <TextField
+                    margin="normal"
                     id="filled-number"
                     label="Cantidad"
                     type="number"
@@ -91,11 +159,11 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
                 />
                 <TextField
                     id="filled-search"
-                    label="Search field"
-                    type="search"
+                    label="Costo"
+                    type="number"
                     variant="filled"
-                />
-                <TextField
+                /> */}
+                {/* <TextField
                     id="filled-helperText"
                     label="Helper text"
                     defaultValue="Default Value"
@@ -138,7 +206,7 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
                     InputLabelProps={{
                         shrink: true,
                     }}
-                />
+                /> */}
             </Box>
         </Box>
 

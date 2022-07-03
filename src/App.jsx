@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
-import FormProducts from './Component/FormProducts'
+// import FormProducts from './Component/FormProducts'
+import { HashRouter as Router, Routes, Route, Link } from "react-router-dom"
+import Dashboard from './Component/Dashboard/Dashboard.jsx'
 // import axios from 'axios'
 
 const producto = {
@@ -59,20 +61,28 @@ const App = () => {
     },[refresh])
 
     return (
-        <FormProducts 
-            IDProducto={IDProducto} 
-            Descripcion={Descripcion} 
-            CantidadRestante={CantidadRestante}
-            Costo={Costo}
-            Precio={Precio}
-            Descuento={Descuento}
-            QRCode={QRCode}
-            FechaCreacion={FechaCreacion}
-            FechaModificacion={FechaModificacion}
-            Estatus={Estatus}
-            Imagenes={Imagenes}
-        />
+
+        <Router>        
+            <Routes>
+                <Route exact path='/dashboard' element={<Dashboard/>}></Route> 
+                {/* <Route exact path='/' element={ 
+                    <FormProducts 
+                        IDProducto={IDProducto} 
+                        Descripcion={Descripcion} 
+                        CantidadRestante={CantidadRestante}
+                        Costo={Costo}
+                        Precio={Precio}
+                        Descuento={Descuento}
+                        QRCode={QRCode}
+                        FechaCreacion={FechaCreacion}
+                        FechaModificacion={FechaModificacion}
+                        Estatus={Estatus}
+                        Imagenes={Imagenes}
+                    />
+                }></Route>  */}
+                
+            </Routes>
+        </Router>
     )
 } 
-
  export default App
