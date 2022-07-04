@@ -1,0 +1,94 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  #canvas1 {
+    border: 1px solid #2980b9;
+    background: red;
+  }
+  #canvas2 {
+    border: 1px solid #2980b9;
+    display: none;
+  }
+  #original {
+    border: 1px solid #2980b9;
+  }
+  #logo {
+    border: 1px solid #2980b9;
+  }
+  td {
+    text-align: center;
+  }
+  
+  .square {
+    position: relative;
+  }
+  
+  .square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+    float: left;
+  }
+  
+  .content_img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #1f1f1f;
+    border: 1px solid white;
+    display: flex;
+  }
+  
+  .img-responsive {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .cursor-zoom {
+    cursor: zoom-in;
+  }
+  
+  .imgMarcaAguaExample {
+    max-width: 45%;
+    height: auto;
+  }
+  
+  .imgRespondive {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+  
+  .z_index_1 {
+    z-index: 1;
+  }
+  
+  .z_index_2 {
+    z-index: 2;
+  }
+  
+  .z_index_3 {
+    z-index: 3;
+  }
+  
+  .z_index_4 {
+    z-index: 4;
+  }
+  
+  .nombreAlbum {
+    color: white;
+    box-shadow: inset 0 -10px 25px 2px #000000;
+    height: 1.7rem;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    /*box-shadow: inset 0 3px 8px rgba(0,0,0,.4);*/
+  }
