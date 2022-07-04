@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-// import FormProducts from './Component/FormProducts'
+import FormProducts from './Component/FormProducts'
 import { HashRouter as Router, Routes, Route, Link } from "react-router-dom"
 import Dashboard from './Component/Dashboard/Dashboard.jsx'
 // import axios from 'axios'
@@ -64,7 +64,7 @@ const App = () => {
 
         <Router>        
             <Routes>
-                <Route exact path='/dashboard' element={<Dashboard/>}></Route> 
+                <Route path='*' element={<Dashboard/>}></Route> 
                 {/* <Route exact path='/' element={ 
                     <FormProducts 
                         IDProducto={IDProducto} 

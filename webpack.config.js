@@ -1,0 +1,1 @@
+entry: ["regenerator-runtime/runtime.js", "/src/Component/Dashboard/examples/Tables/DataTable/index.jsx"]

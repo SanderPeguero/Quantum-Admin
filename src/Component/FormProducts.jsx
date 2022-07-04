@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Box from '@mui/material/Box'
+import { Box } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -41,6 +41,7 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
             }}
             autoComplete="off"
         >
+
             <div>
                 <h1>Registros Productos</h1>
             </div>
@@ -135,7 +136,7 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
 
 
 
-                {/* <TextField
+                <TextField
                     margin="normal"
                     required
                     fullWidth
@@ -146,8 +147,9 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
                     variant="filled"
                     autoComplete="Descripcion"
                     autoFocus
-                /> */}
-                {/* <TextField
+                />
+
+                <TextField
                     margin="normal"
                     id="filled-number"
                     label="Cantidad"
@@ -157,13 +159,15 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
                     }}
                     variant="filled"
                 />
+                
                 <TextField
                     id="filled-search"
                     label="Costo"
                     type="number"
                     variant="filled"
-                /> */}
-                {/* <TextField
+                />
+
+                <TextField
                     id="filled-helperText"
                     label="Helper text"
                     defaultValue="Default Value"
@@ -206,7 +210,7 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
                     InputLabelProps={{
                         shrink: true,
                     }}
-                /> */}
+                />
             </Box>
         </Box>
 
