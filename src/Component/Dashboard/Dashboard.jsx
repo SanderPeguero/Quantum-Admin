@@ -18,8 +18,9 @@ import MDBox from "./components/MDBox";
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "./context/index.jsx";
 
 // Images
-import brandWhite from "./assets/images/logo-ct.png";
-import brandDark from "./assets/images/logo-ct-dark.png";
+import brandWhite from "../../../Logo.png";
+import brandDark from "../../../WhiteLogo.png";
+
 
 // Material Dashboard 2 React routes
 import routes from "./routes.jsx";

@@ -110,14 +110,12 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
 
 
         <Box sx={{
-            marginTop: 8,
+            margin: '20rem',
+            marginTop: '1rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
         }}>
-            <Avatar sx={{ m: 0, bgcolor: '#000000', height: '4rem', width: '4rem' }}>
-                LOGO
-            </Avatar>
             <div >
                 <h1>Registros Productos</h1>
             </div>
