@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-// import FormProducts from './Component/FormProducts'
+import FormProducts from './Component/FormProducts'
 import { HashRouter as Router, Routes, Route, Link } from "react-router-dom"
 import Dashboard from './Component/Dashboard/Dashboard.jsx'
+import './Styles.css'
 // import axios from 'axios'
 
 const producto = {
@@ -65,7 +66,7 @@ const App = () => {
         <Router>        
             <Routes>
                 <Route exact path='/dashboard' element={<Dashboard/>}></Route> 
-                {/* <Route exact path='/' element={ 
+                <Route exact path='/' element={ 
                     <FormProducts 
                         IDProducto={IDProducto} 
                         Descripcion={Descripcion} 
@@ -79,7 +80,7 @@ const App = () => {
                         Estatus={Estatus}
                         Imagenes={Imagenes}
                     />
-                }></Route>  */}
+                }></Route> 
                 
             </Routes>
         </Router>
