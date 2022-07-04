@@ -8,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import Avatar from '@mui/material/Avatar';
 import '../Styles.css'
 import "bootstrap/dist/css/bootstrap.min.css";
+import DashboardNavbar from "./Dashboard/examples/Navbars/DashboardNavbar";
 import axios from 'axios'
 
 
@@ -116,6 +117,7 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
             flexDirection: 'column',
             alignItems: 'center',
         }}>
+            <DashboardNavbar/>
             <div >
                 <h1>Registros Productos</h1>
             </div>
