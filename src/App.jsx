@@ -62,7 +62,6 @@ const App = () => {
     },[refresh])
 
     return (
-
         <Router>        
             <Routes>
                 <Route path='*' element={<Dashboard/>}></Route> 
@@ -81,7 +80,6 @@ const App = () => {
                         Imagenes={Imagenes}
                     />
                 }></Route> 
-                
             </Routes>
         </Router>
     )
