@@ -35,16 +35,16 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         let objData = {
-            IDProducto: data.get('IDProducto'),
-            Descripcion: data.get('Descripcion'),
-            CantidadRestante: data.get('CantidadRestante'),
-            Costo: data.get('Costo'),
-            Precio: data.get('Precio'),
-            Descuento: data.get('Descuento'),
-            QRCode: data.get('QRCode'),
-            FechaCreacion: data.get('FechCreacion'),
-            FechaModificacion: data.get('FechaModificacion'),
-            Estatus: data.get('estatus'),
+            ProductId: data.get('IDProducto'),
+            Description: data.get('Descripcion'),
+            Stock: data.get('CantidadRestante'),
+            Cost: data.get('Costo'),
+            Price: data.get('Precio'),
+            Discount: data.get('Descuento'),
+            Image: data.get('QRCode'),
+            CreationDate: data.get('FechCreacion'),
+            ModificationDate: data.get('FechaModificacion'),
+            Status: data.get('estatus'),
             // Imagenes: data.get('imagenes')
         };
 
