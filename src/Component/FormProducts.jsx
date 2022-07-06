@@ -48,7 +48,7 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
             // Imagenes: data.get('imagenes')
         };
 
-        axios.put('https://quantumswap.herokuapp.com/productos/', objData)
+        axios.put('https://quantumswap.herokuapp.com/products/', objData)
             .then((response) => {
                 console.log(response.data)
             })
