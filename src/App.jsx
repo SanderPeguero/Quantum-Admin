@@ -37,7 +37,7 @@ const App = () => {
     const [refresh, setrefresh] = useState(false); 
     const getProducts = () => {
     
-        axios.get("https://quantumswap.herokuapp.com/productos/")
+        axios.get("https://quantumswap.herokuapp.com/products/")
         
         .then(response => {
         
