@@ -1,34 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Grid, IconButton, Input, Menu, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { Button } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
+import DashboardNavbar from "./Dashboard/examples/Navbars/DashboardNavbar";
 import Avatar from '@mui/material/Avatar';
 import '../Styles.css'
 import "bootstrap/dist/css/bootstrap.min.css";
-import DashboardNavbar from "./Dashboard/examples/Navbars/DashboardNavbar";
+import { Button } from '@mui/material'
 import axios from 'axios'
+import SearchIcon from '@mui/icons-material/Search'
+import logo from '../../Logo.png'
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import { indigo } from '@mui/material/colors';
+import UrlApi from '../globals'
 
 
+const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Image, CreationDate, ModificatioDate, Status, Imagenes, product }) => {
 
+    const ColorButton = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText(indigo[800]),
+        backgroundColor: indigo[800],
+        '&:hover': {
+            backgroundColor: indigo[700],
+        },
+    }));
 
-const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio, Descuento, QRCode, FechaCreacion, FechaModificacion, Estatus, Imagenes }) => {
+    const [images, setImages] = useState([]);
 
-    
-   const [images, setImages] = useState([]);
-
-    IDProducto 
-    Descripcion
-    CantidadRestante
-    Costo
-    Precio
-    Descuento
-    QRCode
-    FechaCreacion = new Date().toUTCString()
-    FechaModificacion
-    Estatus
+    ProductId
+    Description
+    Stock
+    Cost
+    Price
+    Discount
+    Image
+    CreationDate = new Date().toUTCString()
+    ModificatioDate
+    Status
     Imagenes
 
     const handleSubmit = (event) => {
@@ -41,25 +49,22 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
             Cost: data.get('Costo'),
             Price: data.get('Precio'),
             Discount: data.get('Descuento'),
-            Image: data.get('QRCode'),
-            CreationDate: data.get('FechCreacion'),
-            ModificationDate: data.get('FechaModificacion'),
-            Status: data.get('estatus'),
+            Image: data.get('QRCode')
+            // CreationDate: data.get('FechCreacion'),
+            // ModificatioDate: data.get('FechaModificacion'),
+            // Status: data.get('estatus'),
             // Imagenes: data.get('imagenes')
         };
 
-        axios.put('https://quantumswap.herokuapp.com/products/', objData)
+        axios.put("https://quantumswap.herokuapp.com/products" ,objData)
             .then((response) => {
                 console.log(response.data)
             })
             .catch((err) => { });
     };
 
-    const handleChange = (e) => {
-        setValue(e);
-    };
 
- 
+  
 
     const ChangeInput = (e) => {
         let indexImg;
@@ -131,8 +136,8 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
     return (
 
         <>
-            
-            <DashboardNavbar/>
+
+            <DashboardNavbar />
             <Box sx={{
                 margin: '20rem',
                 marginTop: '1rem',
@@ -140,241 +145,191 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
                 flexDirection: 'column',
                 alignItems: 'center',
             }}>
-                <div >
-                    <h1>Registros Productos</h1>
-                </div>
+                <Avatar sx={{ m: 0, bgcolor: '#000000', height: '4rem', width: '4rem' }}>
+                    <img src={logo} style={{ height: '2.6rem', width: '3rem', alignSelf: 'center' }}></img>
+                </Avatar>
+
+                <Typography variant="h1" gutterBottom style={{ color: 'black' }}>
+                    Product Registrations
+                </Typography>
+
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 4 }}>
-                    <Grid container spacing={2}>
+
+                    <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                margin="normal"
                                 required
-                                fullWidth
                                 id="filled-number"
                                 label="IDProducto"
                                 name="IDProducto"
                                 value={Id}
                                 type="number"
-                                autoComplete="IDProducto"
-                                autoFocus
-                            
+                                fullWidth 
                             />
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <Button variant="contained">
-
-                                <SearchIcon fontSize="inherit"></SearchIcon>
-
-
-                            </Button>
+                            <ColorButton variant="outlined" >
+                                <SearchIcon sx={{ fontSize: 40 }}></SearchIcon>
+                            </ColorButton>
                         </Grid>
+                        
 
 
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} >
                             <TextField
-                                margin="normal"
                                 required
                                 fullWidth
                                 id="filled"
                                 label="Descripcion"
                                 name="Descripcion"
-                                autoComplete="Descripcion"
-                                autoFocus
-
                             />
                         </Grid>
 
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
                             <TextField
-                                margin="normal"
                                 required
                                 fullWidth
                                 id="filled"
-                                label="Imagen"
+                                label="Image Url"
                                 name="QRCode"
-                                autoFocus
-
                             />
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                margin="normal"
                                 required
-                                fullWidth
                                 id="filled-number"
-                                label="Costo"
+                                label="Cost"
                                 name="Costo"
                                 type="number"
-                                autoComplete="Costo"
-                                autoFocus
-
+                                fullWidth
                             />
                         </Grid>
+
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                margin="normal"
                                 required
-                                fullWidth
                                 id="filled-number"
-                                label="Cantidad"
+                                label="Stock"
                                 name="CantidadRestante"
                                 type="number"
-                                autoComplete="Cantidad"
-                                autoFocus
-
+                                fullWidth
                             />
                         </Grid>
+
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                margin="normal"
                                 required
-                                fullWidth
                                 id="filled-number"
-                                label="Precio"
+                                label="Price"
                                 name="Precio"
                                 type="number"
-                                autoComplete="Precio"
-                                autoFocus
+                                fullWidth
 
                             />
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                margin="normal"
                                 required
-                                fullWidth
                                 id="filled-number"
-                                label="Descuento %"
+                                label="Discount %"
                                 name="Descuento"
                                 type="number"
-                                autoComplete="Descuento"
-                                autoFocus
-
+                                fullWidth
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <div className="container-fluid">
-                                <label className="btn btn btn-warning">
-                                    <span>Selecionar Imagen</span>
-                                    <input hidden type="file" multiple onChange={ChangeInput}></input>
-                                </label>
 
-                                {/*View */}
-
-                                <div className='row'>
-                                    {images.map((imagen) => (
-                                        <div className='col-6 col-sm-4 col-lg-3 square' key={imagen.index}>
-                                            <div className='content-img'>
-                                                <button
-                                                    className='position-absolute btn btn-danger'
-                                                    onClick={deleteImg.bind(imagen, imagen.index)}
-                                                >X
-                                                </button>
-                                                <img
-                                                    alt='algo'
-                                                    src={imagen.url}
-                                                    data-togle="modal"
-                                                    data-target="#ModalPreViewImg"
-                                                    className="img-responsive"></img>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            {/* <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="filled-number"
-                                label="Image"
-                                name="Image"
-                                type="number"
-                                autoComplete="Image"
-                                autoFocus
-
-                            /> */}
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
+                        {/* <Grid item xs={12} sm={6}>
                             <TextField
-                                margin="normal"
                                 required
                                 fullWidth
                                 id="datetime-local"
-                                label="Fecha de Creacion"
-                                name= "FechCreacion"
+                                label="Creation Date"
+                                name="FechCreacion"
                                 type="datetime-local"
                                 defaultValue="2017-05-24T10:30"
-                                sx={{ width: 250 }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-
-                                style={{ marginRight: '1rem' }}
                             />
 
+
+                        </Grid> */}
+
+                        {/* <Grid item xs={12} sm={6}>
                             <TextField
-                                margin="normal"
                                 required
                                 fullWidth
                                 id="datetime-local"
-                                label="Fecha de Modificacion"
+                                label="Modificatio Date"
                                 type="datetime-local"
                                 name="FechaModificacion"
                                 defaultValue="2017-05-24T10:30"
-                                sx={{ width: 250 }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
+
                             />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
+                        </Grid> */}
+
+                        {/* <Grid item xs={12} >
                             <TextField
-                                margin="normal"
                                 required
                                 fullWidth
                                 id="filled-number"
                                 label="Estatus"
                                 name="estatus"
                                 type="number"
-                                autoComplete="Estatus"
-                                autoFocus
-
                             />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="filled-number"
-                                label="Imagenes"
-                                name="imagenes"
-                                type="number"
-                                autoComplete="Imagenes"
-                                autoFocus
-
-                            />
-                        </Grid>
-
+                        </Grid> */}
                     </Grid>
+
+
+                    <Button
+                        variant="contained"
+                        color="success"
+                        sx={{ mt: 3, mb: 2 }}
+                        style={{
+                            marginRight: '1rem',
+                            width: '80px',
+                            color: 'white',
+                            background: 'blue'
+                        }}
+                    >
+                        New
+                    </Button>
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
+                        // color="success" 
+                        style={{
+                            marginRight: '1rem',
+                            width: '80px',
+                            color: 'white',
+                            background: 'green'
+                        }}
                     >
                         Guardar
                     </Button>
+
+                    <Button
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        style={{
+                            marginRight: '1rem',
+                            width: '80px',
+                            color: 'white',
+                            background: 'red',
+
+                        }}
+                    >
+                        Delete
+                    </Button>
+
                 </Box>
-                {/* <Button variant="contained" color="success">
-                    Success
-                </Button> */}
             </Box>
         </>
     )
 }
 
 export default FormProducts
+
+
