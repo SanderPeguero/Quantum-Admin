@@ -19,7 +19,7 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
     
    const [images, setImages] = useState([]);
 
-    IDProducto
+    IDProducto 
     Descripcion
     CantidadRestante
     Costo
@@ -98,6 +98,27 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
         return arrayImages
     }
 
+
+
+
+
+
+
+
+    const [Id, setId] = useState();
+    
+
+
+
+
+
+
+
+
+
+
+
+
     function deleteImg(indice) {
         const newImgs = images.filter(function (element) {
             return element.index !== indice;
@@ -132,6 +153,7 @@ const FormProducts = ({ IDProducto, Descripcion, CantidadRestante, Costo, Precio
                                 id="filled-number"
                                 label="IDProducto"
                                 name="IDProducto"
+                                value={Id}
                                 type="number"
                                 autoComplete="IDProducto"
                                 autoFocus
