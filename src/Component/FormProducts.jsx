@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Grid, IconButton, Input, Menu, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import DashboardNavbar from "./Dashboard/examples/Navbars/DashboardNavbar";
@@ -12,9 +12,10 @@ import logo from '../../Logo.png'
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { indigo } from '@mui/material/colors';
+import UrlApi from '../globals'
 
 
-const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Image, CreationDate, ModificatioDate, Status, Imagenes }) => {
+const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Image, CreationDate, ModificatioDate, Status, Imagenes, product }) => {
 
     const ColorButton = styled(Button)(({ theme }) => ({
         color: theme.palette.getContrastText(indigo[800]),
@@ -48,14 +49,14 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
             Cost: data.get('Costo'),
             Price: data.get('Precio'),
             Discount: data.get('Descuento'),
-            Image: data.get('QRCode'),
-            CreationDate: data.get('FechCreacion'),
-            ModificatioDate: data.get('FechaModificacion'),
-            Status: data.get('estatus'),
+            Image: data.get('QRCode')
+            // CreationDate: data.get('FechCreacion'),
+            // ModificatioDate: data.get('FechaModificacion'),
+            // Status: data.get('estatus'),
             // Imagenes: data.get('imagenes')
         };
 
-        axios.put('https://quantumswap.herokuapp.com/products/', objData)
+        axios.put("https://quantumswap.herokuapp.com/products" ,objData)
             .then((response) => {
                 console.log(response.data)
             })
@@ -63,7 +64,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
     };
 
 
-
+  
 
     const ChangeInput = (e) => {
         let indexImg;
@@ -130,7 +131,9 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                 <Typography variant="h1" gutterBottom style={{ color: 'black' }}>
                     Product Registrations
                 </Typography>
+
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 4 }}>
+
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -139,15 +142,16 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 label="IDProducto"
                                 name="IDProducto"
                                 type="number"
-                                fullWidth
+                                fullWidth 
                             />
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <ColorButton variant="outlined">
+                            <ColorButton variant="outlined" >
                                 <SearchIcon sx={{ fontSize: 40 }}></SearchIcon>
                             </ColorButton>
                         </Grid>
+                        
 
 
                         <Grid item xs={12} >
@@ -180,6 +184,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 fullWidth
                             />
                         </Grid>
+
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
@@ -190,6 +195,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 fullWidth
                             />
                         </Grid>
+
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
@@ -213,7 +219,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                             />
                         </Grid>
 
-                        <Grid item xs={12} sm={6}>
+                        {/* <Grid item xs={12} sm={6}>
                             <TextField
                                 required
                                 fullWidth
@@ -225,8 +231,9 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                             />
 
 
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
+                        </Grid> */}
+
+                        {/* <Grid item xs={12} sm={6}>
                             <TextField
                                 required
                                 fullWidth
@@ -237,8 +244,9 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 defaultValue="2017-05-24T10:30"
 
                             />
-                        </Grid>
-                        <Grid item xs={12} >
+                        </Grid> */}
+
+                        {/* <Grid item xs={12} >
                             <TextField
                                 required
                                 fullWidth
@@ -247,7 +255,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 name="estatus"
                                 type="number"
                             />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
 
 
