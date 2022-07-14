@@ -41,8 +41,6 @@ const App = () => {
         
         .then(response => {
         
-          // console.log(response.data.Data);
-          // products = response.data.Data
           setProduct(response.data.Data)
         
         }).catch(error=>{
@@ -63,22 +61,7 @@ const App = () => {
     return (
         <Router>        
             <Routes>
-                <Route path='*' element={<Dashboard/>}></Route> 
-                {/* <Route exact path='/formulario' element={ 
-                    <FormProducts 
-                        IDProducto={IDProducto} 
-                        Descripcion={Descripcion} 
-                        CantidadRestante={CantidadRestante}
-                        Costo={Costo}
-                        Precio={Precio}
-                        Descuento={Descuento}
-                        QRCode={QRCode}
-                        FechaCreacion={FechaCreacion}
-                        FechaModificacion={FechaModificacion}
-                        Estatus={Estatus}
-                        Imagenes={Imagenes}
-                    />
-                }></Route>  */}
+                <Route path='*' element={<Dashboard/>}></Route>
             </Routes>
         </Router>
     )

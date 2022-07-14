@@ -112,6 +112,27 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
         return arrayImages
     }
 
+
+
+
+
+
+
+
+    const [Id, setId] = useState();
+    
+
+
+
+
+
+
+
+
+
+
+
+
     function deleteImg(indice) {
         const newImgs = images.filter(function (element) {
             return element.index !== indice;
@@ -165,6 +186,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 id="filled-number"
                                 label="IDProducto"
                                 name="IDProducto"
+                                value={Id}
                                 type="number"
                                 fullWidth
                             />
