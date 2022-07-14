@@ -161,7 +161,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                     theme.palette.mode === 'dark' ? '#101010' : 'grey.50',
                 color: (theme) =>
                     theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-                border: '2px solid',
+                border: '0px solid',
                 borderColor: (theme) =>
                     theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
                 borderRadius: 2,
