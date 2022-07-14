@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Box, Grid, IconButton, Input, Menu, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import DashboardNavbar from "./Dashboard/examples/Navbars/DashboardNavbar";
-import Avatar from '@mui/material/Avatar';
 import '../Styles.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from '@mui/material'
 import axios from 'axios'
 import SearchIcon from '@mui/icons-material/Search'
-import logo from '../../Logo.png'
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { indigo } from '@mui/material/colors';
 import UrlApi from '../globals'
+import InputAdornment from '@mui/material/InputAdornment';
+
+
 
 
 const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Image, CreationDate, ModificatioDate, Status, Imagenes, product }) => {
@@ -50,13 +51,9 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
             Price: data.get('Precio'),
             Discount: data.get('Descuento'),
             Image: data.get('QRCode')
-            // CreationDate: data.get('FechCreacion'),
-            // ModificatioDate: data.get('FechaModificacion'),
-            // Status: data.get('estatus'),
-            // Imagenes: data.get('imagenes')
         };
 
-        axios.put("https://quantumswap.herokuapp.com/products" ,objData)
+        axios.put("https://quantumswap.herokuapp.com/products", objData)
             .then((response) => {
                 console.log(response.data)
             })
@@ -64,7 +61,19 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
     };
 
 
-  
+    const [values, setValues] = React.useState({
+        amount: '',
+        password: '',
+        weight: '',
+        weightRange: '',
+        showPassword: false,
+    });
+
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+
 
     const ChangeInput = (e) => {
         let indexImg;
@@ -123,16 +132,31 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                mx: 'auto',
+                width: 800,
+                p: 1,
+                m: 4,
+                bgcolor: (theme) =>
+                    theme.palette.mode === 'dark' ? '#101010' : 'grey.50',
+                color: (theme) =>
+                    theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                border: '5px solid',
+                borderColor: (theme) =>
+                    theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
+                borderRadius: 2,
+                textAlign: 'center',
+                fontSize: '0.875rem',
+                fontWeight: '800',
+                alignContent: 'center',
+                backgroundColor: 'black'
             }}>
-                <Avatar sx={{ m: 0, bgcolor: '#000000', height: '4rem', width: '4rem' }}>
-                    <img src={logo} style={{ height: '2.6rem', width: '3rem', alignSelf: 'center' }}></img>
-                </Avatar>
 
                 <Typography variant="h1" gutterBottom style={{ color: 'black' }}>
                     Product Registrations
                 </Typography>
+                <br/>
 
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 4 }}>
+                <Box component="form" noValidate onSubmit={handleSubmit} >
 
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
@@ -142,7 +166,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 label="IDProducto"
                                 name="IDProducto"
                                 type="number"
-                                fullWidth 
+                                fullWidth
                             />
                         </Grid>
 
@@ -151,7 +175,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 <SearchIcon sx={{ fontSize: 40 }}></SearchIcon>
                             </ColorButton>
                         </Grid>
-                        
+
 
 
                         <Grid item xs={12} >
@@ -161,6 +185,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 id="filled"
                                 label="Descripcion"
                                 name="Descripcion"
+
                             />
                         </Grid>
 
@@ -182,7 +207,10 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 name="Costo"
                                 type="number"
                                 fullWidth
+                                InputProps={{ startAdornment: <InputAdornment position='start'>$</InputAdornment> }}
+
                             />
+
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
@@ -204,6 +232,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 name="Precio"
                                 type="number"
                                 fullWidth
+                                InputProps={{ startAdornment: <InputAdornment position='start'>$</InputAdornment> }}
 
                             />
                         </Grid>
@@ -212,95 +241,60 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                             <TextField
                                 required
                                 id="filled-number"
-                                label="Discount %"
+                                label="Discount"
                                 name="Descuento"
                                 type="number"
                                 fullWidth
+                                InputProps={{ endAdornment: <InputAdornment position='end'>%</InputAdornment> }}
                             />
                         </Grid>
 
-                        {/* <Grid item xs={12} sm={6}>
-                            <TextField
-                                required
-                                fullWidth
-                                id="datetime-local"
-                                label="Creation Date"
-                                name="FechCreacion"
-                                type="datetime-local"
-                                defaultValue="2017-05-24T10:30"
-                            />
-
-
-                        </Grid> */}
-
-                        {/* <Grid item xs={12} sm={6}>
-                            <TextField
-                                required
-                                fullWidth
-                                id="datetime-local"
-                                label="Modificatio Date"
-                                type="datetime-local"
-                                name="FechaModificacion"
-                                defaultValue="2017-05-24T10:30"
-
-                            />
-                        </Grid> */}
-
-                        {/* <Grid item xs={12} >
-                            <TextField
-                                required
-                                fullWidth
-                                id="filled-number"
-                                label="Estatus"
-                                name="estatus"
-                                type="number"
-                            />
-                        </Grid> */}
                     </Grid>
 
-
-                    <Button
-                        variant="contained"
-                        color="success"
-                        sx={{ mt: 3, mb: 2 }}
-                        style={{
-                            marginRight: '1rem',
-                            width: '80px',
-                            color: 'white',
-                            background: 'blue'
-                        }}
+                    <Box
+                    
                     >
-                        New
-                    </Button>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        // color="success" 
-                        style={{
-                            marginRight: '1rem',
-                            width: '80px',
-                            color: 'white',
-                            background: 'green'
-                        }}
-                    >
-                        Guardar
-                    </Button>
-
-                    <Button
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        style={{
-                            marginRight: '1rem',
-                            width: '80px',
-                            color: 'white',
-                            background: 'red',
-
-                        }}
-                    >
-                        Delete
-                    </Button>
+                        <Button
+                            variant="contained"
+                            color="success"
+                            sx={{ mt: 3, mb: 2 }}
+                            style={{
+                                marginRight: '1rem',
+                                width: '80px',
+                                color: 'white',
+                                background: 'blue'
+                            }}
+                        >
+                            New
+                        </Button>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            // color="success" 
+                            style={{
+                                marginRight: '1rem',
+                                width: '80px',
+                                color: 'white',
+                                background: 'green'
+                            }}
+                        >
+                            Guardar
+                        </Button>
+                        <Button
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            style={{
+                                marginRight: '1rem',
+                                width: '80px',
+                                color: 'white',
+                                background: 'red',
+                            }}
+                        >
+                            Delete
+                        </Button>
+                    </Box>
 
                 </Box>
             </Box>
