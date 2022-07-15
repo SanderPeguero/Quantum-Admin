@@ -80,7 +80,7 @@ const routes = [
     type: "collapse",
     name: "Products",
     key: "Products",
-    icon: <Icon fontSize="small">store_mall_directory</Icon>,
+    icon: <Icon fontSize="small">restore_page</Icon>,
     route: "/formulario",
     component: <FormProducts/>,
   },
