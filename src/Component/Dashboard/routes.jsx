@@ -46,6 +46,7 @@ import SignIn from "./layouts/authentication/sign-in";
 import SignUp from "./layouts/authentication/sign-up";
 import FormProducts from '../../Component/FormProducts'
 import ShoppingHistory from '../ShoppingHistpry';
+import FormOffers from "../FormOffers"
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -82,6 +83,14 @@ const routes = [
     icon: <Icon fontSize="small">store_mall_directory</Icon>,
     route: "/formulario",
     component: <FormProducts/>,
+  },
+  {
+    type: "collapse",
+    name: "Offers",
+    key: "Offers",
+    icon: <Icon fontSize="small">sell</Icon>,
+    route: "/offers",
+    component: <FormOffers/>,
   },
   {
     type: "collapse",
