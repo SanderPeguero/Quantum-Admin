@@ -45,6 +45,7 @@ import Profile from "./layouts/profile";
 import SignIn from "./layouts/authentication/sign-in";
 import SignUp from "./layouts/authentication/sign-up";
 import FormProducts from '../../Component/FormProducts'
+import ShoppingHistory from '../ShoppingHistpry';
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -81,6 +82,15 @@ const routes = [
     icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
     route: "/formulario",
     component: <FormProducts/>,
+  },
+  {
+    type: "collapse",
+    name: "Shopping History",
+    key: "ShoppingHistory",
+    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
+    route: "/History",
+    component: <ShoppingHistory/>,
+    
   },
   {
     type: "collapse",

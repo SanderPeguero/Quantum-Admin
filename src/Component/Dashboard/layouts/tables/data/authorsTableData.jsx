@@ -26,6 +26,9 @@ import team2 from "../../../assets/images/team-2.jpg";
 import team3 from "../../../assets/images/team-3.jpg";
 import team4 from "../../../assets/images/team-4.jpg";
 
+//Icon
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
 export default function data() {
   const Author = ({ image, name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -50,11 +53,11 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
-      { Header: "function", accessor: "function", align: "left" },
+      { Header: "Cliente", accessor: "author", width: "45%", align: "left" },
+      { Header: "firstName", accessor: "function", align: "left" },
+      { Header: "lastName", accessor: "employed", align: "center" },
       { Header: "status", accessor: "status", align: "center" },
-      { Header: "employed", accessor: "employed", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "Show", accessor: "action", align: "center" },
     ],
 
     rows: [
@@ -72,8 +75,8 @@ export default function data() {
           </MDTypography>
         ),
         action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+            <VisibilityIcon></VisibilityIcon>
           </MDTypography>
         ),
       },
@@ -91,8 +94,8 @@ export default function data() {
           </MDTypography>
         ),
         action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+           <VisibilityIcon></VisibilityIcon>
           </MDTypography>
         ),
       },
@@ -110,8 +113,8 @@ export default function data() {
           </MDTypography>
         ),
         action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+            <VisibilityIcon></VisibilityIcon>
           </MDTypography>
         ),
       },
@@ -129,8 +132,8 @@ export default function data() {
           </MDTypography>
         ),
         action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+            <VisibilityIcon></VisibilityIcon>
           </MDTypography>
         ),
       },
@@ -148,8 +151,8 @@ export default function data() {
           </MDTypography>
         ),
         action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+            <VisibilityIcon></VisibilityIcon>
           </MDTypography>
         ),
       },
@@ -167,8 +170,8 @@ export default function data() {
           </MDTypography>
         ),
         action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+            <VisibilityIcon></VisibilityIcon>
           </MDTypography>
         ),
       },

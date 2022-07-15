@@ -172,7 +172,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                 backgroundColor: 'black'
             }}>
 
-                <Typography variant="h1" gutterBottom style={{ color: 'black' }}>
+                <Typography variant="h1" gutterBottom style={{ color: 'white' }}>
                     Product Registrations
                 </Typography>
                 <br/>
@@ -192,9 +192,9 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                             />
                         </Grid>
 
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={1}>
                             <ColorButton variant="outlined" >
-                                <SearchIcon sx={{ fontSize: 40 }}></SearchIcon>
+                                <SearchIcon sx={{ fontSize: 50 }}></SearchIcon>
                             </ColorButton>
                         </Grid>
 
