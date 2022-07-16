@@ -96,7 +96,7 @@ const routes = [
     type: "collapse",
     name: "Shopping History",
     key: "ShoppingHistory",
-    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
+    icon: <Icon fontSize="small">restore_page</Icon>,
     route: "/History",
     component: <ShoppingHistory/>,
     
