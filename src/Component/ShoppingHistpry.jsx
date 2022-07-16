@@ -172,6 +172,7 @@ const ShoppingHistory = () => {
                                     <TextField
                                         fullWidth
                                         id="outlined-number"
+                                        type="name"
                                         label="User Name"
                                         InputLabelProps={{
                                             shrink: true,
@@ -205,6 +206,15 @@ const ShoppingHistory = () => {
                                         <SearchIcon sx={{ fontSize: 40 }}></SearchIcon>
                                     </ColorButton>
                                 </Grid >
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        id="email"
+                                        label="Email"
+                                        type="email"
+                                    />
+
+                                </Grid>
                             </Grid>
                         </Box>
                         <Box sx={{

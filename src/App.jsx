@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, Link } from "react-router-dom"
 import Dashboard from './Component/Dashboard/Dashboard.jsx'
 import './Styles.css'
 // import axios from 'axios'
+import HistoryCustomer from './Component/Historial/HistoryCustomer.jsx'
 
 const producto = {
 
@@ -34,36 +35,41 @@ let Imagenes = {}
 
 const App = () => {
 
-    const [refresh, setrefresh] = useState(false); 
+    const [refresh, setrefresh] = useState(false);
+    const [openInfoCliente, setOpenInfoCliente] = useState(false)
+
     const getProducts = () => {
-    
+
         axios.get("https://quantumswap.herokuapp.com/products/")
-        
-        .then(response => {
-        
-          setProduct(response.data.Data)
-        
-        }).catch(error=>{
-        
-          console.log(error);
-        
-        })
-    
+
+            .then(response => {
+
+                setProduct(response.data.Data)
+
+            }).catch(error => {
+
+                console.log(error);
+
+            })
+
     }
-    
-    useEffect(() =>{
-        if(refresh == true){
+
+    useEffect(() => {
+        if (refresh == true) {
             getProducts();
             setrefresh(false)
         }
-    },[refresh])
+    }, [refresh])
 
     return (
-        <Router>        
-            <Routes>
-                <Route path='*' element={<Dashboard/>}></Route>
-            </Routes>
-        </Router>
+        <>
+            <Router>
+                <Routes>
+                    <Route path='*' element={<Dashboard />}></Route>
+                    <Route exact path='/Historycust' element={<HistoryCustomer />}></Route>
+                </Routes>
+            </Router>
+        </>
     )
-} 
- export default App
+}
+export default App
