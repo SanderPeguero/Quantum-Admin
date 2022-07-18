@@ -17,7 +17,14 @@ import logoInvesion from "../Dashboard/assets/images/small-logos/logo-invision.s
 
 export default function data() {
 
+const datacliente = [
+  {Nombre: 'Jose Alberto', Emaail: 'josegonzalez@gmail.com', Realizado: 7, Devueltoss: 4}
+]
 
+
+
+
+  
   const Project = ({ image, name }) => (
 
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -42,6 +49,8 @@ export default function data() {
 
   );
 
+
+
   return {
 
     
@@ -54,6 +63,8 @@ export default function data() {
       { Header: "action", accessor: "action", align: "center" }
 
     ],
+
+  
 
     rows: [
       {
@@ -77,7 +88,6 @@ export default function data() {
             7
           </MDTypography>
         ),
-        completion: <Progress color="info" value={60} />,
         action: (
           <MDTypography component="a"   href="#/Historycust" color="text">
             <Icon >visibility</Icon>

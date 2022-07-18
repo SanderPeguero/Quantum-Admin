@@ -1,12 +1,16 @@
 import {react} from 'react'
+import axios from 'axios'
+import Customer from './Customer/Customer'
+import { Box } from '@mui/system'
 
-const HistoryCustomer = ({setOpen}) =>{
+const HistoryCustomer = () =>{
 
+  
     return(
         <>
-        <h1>
-            Historial de compras
-        </h1>
+        <Box>
+            <Customer></Customer>
+        </Box>
         </>
     )
 }

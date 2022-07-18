@@ -9,6 +9,7 @@ import DataTable from '../Dashboard/examples/Tables/DataTable'
 // Data
 import DataHistoryTable from "./DataHistoryTable";
 
+
 const HistoryShopping = () => {
 
   const { columns: pColumns, rows: pRows } = DataHistoryTable(); 
@@ -40,6 +41,7 @@ const HistoryShopping = () => {
         
         style={{color: 'white'}}
       />
+
     </Box>
 
   )

@@ -16,6 +16,7 @@ import InputLabel from '@mui/material/InputLabel';
 import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
+import input from './Dashboard/assets/theme/components/form/input';
 
 
 
@@ -122,7 +123,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <Box sx={{   minWidth: 120 }} style={{padding: '0'}}>
+                            <Box >
                                 <FormControl fullWidth>
                                     <InputLabel >Section</InputLabel>
                                     <Select
@@ -131,7 +132,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                         value={age}
                                         label="Age"
                                         name ="Age"
-                                        // onChange={handleChangeOffersType}
+                                        onChange={handleChangeOffersType}
                                        
                                     >
                                         <MenuItem value={10} onSelect={()=> setAge("10")}>Ten</MenuItem>
@@ -144,7 +145,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <Box sx={{ minWidth: 120 }} style={{padding: '5rem'}}>
+                            <Box sx={{ minWidth: 120 }} style={{padding: '0'}}>
                                 <FormControl fullWidth>
                                     <InputLabel >Category</InputLabel>
                                     <Select
@@ -153,7 +154,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                         value={age}
                                         label="Age"
                                         name ="Age"
-                                        // onChange={handleChangeOffersType}
+                                        onChange={handleChangeOffersType}
                                     
                                     >
                                         <MenuItem value={10} onSelect={()=> setAge("10")}>Ten</MenuItem>

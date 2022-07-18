@@ -26,7 +26,7 @@ const select = {
     select: {
       display: "grid",
       alignItems: "center",
-      padding: `0 ${pxToRem(12)} !important`,
+      padding: `5 ${pxToRem(24)} !important`,
 
       "& .Mui-selected": {
         backgroundColor: transparent.main,

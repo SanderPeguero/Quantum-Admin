@@ -17,6 +17,10 @@ import TablaContent from './Historial/TablaContent';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import Customer from './Historial/Customer/Customer'
+import DataPrueba from './Historial/DataPrueba'
+// import MDBox from "../Dashboard/components/MDBox";
+import MDBox from './Dashboard/components/MDBox'
 
 
 const ShoppingHistory = () => {
@@ -29,31 +33,32 @@ const ShoppingHistory = () => {
         },
     }));
 
-    // const [User, setUser] = useState([])
+    const [User, setUser] = useState([])
 
-    // const peticionGet = () => {
+    const handlesearch = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        let objData = {
+            Email: data.get('id'),
+          };
+        axios.get("https://quantumswap.herokuapp.com/users", objData)
+            .then(response => {
 
-    //     axios.get("https://quantumswap.herokuapp.com/users/")
+                setUser(response.data)
+                // console.log(response.data)
 
-    //         .then(response => {
+            }).catch(err => {
+                swal({
+                    title: "Not Server Connection!",
+                    text: "Products can’t be search!",
+                    icon: "error",
+                    button: "Ok"
+                })
+                console.log(err)
+            })
+    }
 
-    //             setUser(response.data)
-    //             // console.log(response.data)
 
-    //         }).catch(err => {
-    //             swal({
-    //                 title: "Not Server Connection!",
-    //                 text: "Products can’t be search!",
-    //                 icon: "error",
-    //                 button: "Ok"
-    //             })
-    //             console.log(err)
-    //         })
-    // }
-
-    // const handleSubmit = () => {
-
-    // }
 
     // useEffect(() => {
 
@@ -68,7 +73,7 @@ const ShoppingHistory = () => {
     return (
         <>
             <DashboardNavbar />
-            <Box sx={{
+            <MDBox sx={{
                 margin: '20rem',
                 marginTop: '1rem',
                 display: 'flex',
@@ -93,7 +98,7 @@ const ShoppingHistory = () => {
                 backgroundColor: 'black'
             }}>
                 <h1 style={{ color: 'white' }}>Shopping History</h1>
-                <Box component="form" noValidate
+                <MDBox component="form" noValidate
                     sx={{
                         margin: '1rem',
                         marginTop: '0rem',
@@ -120,8 +125,8 @@ const ShoppingHistory = () => {
                                         <Typography component="h2" variant="h5">
                                             All received
                                         </Typography>
-                                        <Typography style={{color: 'blue'}}>
-                                            <BeenhereIcon style={{margin: '0.50rem'}}></BeenhereIcon>
+                                        <Typography style={{ color: 'blue' }}>
+                                            <BeenhereIcon style={{ margin: '0.50rem' }}></BeenhereIcon>
                                             10,500
                                         </Typography>
 
@@ -137,8 +142,8 @@ const ShoppingHistory = () => {
                                         <Typography component="h2" variant="h5">
                                             Returned
                                         </Typography>
-                                        <Typography style={{color: 'red'}}>
-                                           <CancelIcon style={{margin: '0.50rem'}}></CancelIcon>
+                                        <Typography style={{ color: 'red' }}>
+                                            <CancelIcon style={{ margin: '0.50rem' }}></CancelIcon>
                                             5
                                         </Typography>
                                     </CardContent>
@@ -153,8 +158,8 @@ const ShoppingHistory = () => {
                                         <Typography component="h3" variant="h5">
                                             User
                                         </Typography>
-                                        <Typography style={{color: 'green'}}>
-                                            <AddBoxIcon style={{margin: '0.50rem'}}></AddBoxIcon>
+                                        <Typography style={{ color: 'green' }}>
+                                            <AddBoxIcon style={{ margin: '0.50rem' }}></AddBoxIcon>
                                             5,000
                                         </Typography>
                                     </CardContent>
@@ -162,7 +167,7 @@ const ShoppingHistory = () => {
                             </CardActionArea>
                         </Grid>
                         {/*Final de los Contenidos del Grid */}
-                        <Box sx={{
+                        <MDBox sx={{
                             margin: '1rem',
                             marginTop: '1rem',
 
@@ -171,12 +176,13 @@ const ShoppingHistory = () => {
                                 <Grid item xs={12} sm={3}>
                                     <TextField
                                         fullWidth
-                                        id="outlined-number"
-                                        type="name"
+                                        id='name'
+                                        type="string"
                                         label="User Name"
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
+                                        
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={3}>
@@ -184,10 +190,11 @@ const ShoppingHistory = () => {
                                         fullWidth
                                         id="outlined-number"
                                         label=" Desde"
-                                        type= 'date'
+                                        type='date'
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
+                                        
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={3}>
@@ -195,7 +202,7 @@ const ShoppingHistory = () => {
                                         fullWidth
                                         id="outlined-number"
                                         label="Fecha Hasta"
-                                        type= 'date'
+                                        type='date'
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -216,8 +223,8 @@ const ShoppingHistory = () => {
 
                                 </Grid>
                             </Grid>
-                        </Box>
-                        <Box sx={{
+                        </MDBox>
+                        <MDBox sx={{
                             margin: '1rem',
                             marginTop: '1rem',
                             flexDirection: 'column',
@@ -236,10 +243,13 @@ const ShoppingHistory = () => {
                         }}>
                             {/* <TablaContent></TablaContent> */}
                             <HistoryUser></HistoryUser>
-                        </Box>
+                            {/* <Customer></Customer> */}
+                            {/* <DataPrueba></DataPrueba> */}
+                          
+                        </MDBox>
                     </Grid>
-                </Box>
-            </Box>
+                </MDBox>
+            </MDBox>
 
         </>
     )
