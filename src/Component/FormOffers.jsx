@@ -43,11 +43,9 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
     const [age, setAge] = useState('');
     const [section, setsection] = useState([])
     const [category, setcategory] = useState([])
-    const [show, setShow] = useState('')
+    const [show, setShow] = useState()
 
     const handleselectsection = (event) => {
-        // event.preventDefault();
-        // const data = new FormData(event.currentTarget);
 
         axios.get("https://quantumswap.herokuapp.com/sections")
             .then((Response) => {
@@ -65,10 +63,6 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
             })
     }
 
-    // useEffect(() => {
-    //     handleselect();
-
-    // },[])
 
     const handleChangeOffersType = (event) => {
       setShow(event.target.value);
