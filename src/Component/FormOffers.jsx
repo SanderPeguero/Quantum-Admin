@@ -22,6 +22,7 @@ import input from './Dashboard/assets/theme/components/form/input';
 
 
 
+
 const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Image, CreationDate, ModificatioDate, Status, Imagenes, product }) => {
 
     const ColorButton = styled(Button)(({ theme }) => ({
@@ -192,18 +193,19 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                 </FormControl>
                             </Box>
                         </Grid>
-                        {/* 
+                        
                         <Grid item xs={12} sm={6}>
                         <TextField
                         required
                                 id="filled-number"
-                                label="Stock"
-                                name="CantidadRestante"
+                                label="Descuento"
+                                // name="CantidadRestante"
                                 type="number"
                                 fullWidth
+                                InputProps={{ endAdornment: <InputAdornment  position='end'>%</InputAdornment> }}
                             />
                         </Grid>
-
+{/* 
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
