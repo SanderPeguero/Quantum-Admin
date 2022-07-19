@@ -19,31 +19,30 @@ const customer = ({ customer }) => {
     const [User, setUser] = useState([]);
     const [refresh, setrefresh] = useState(false)
 
-    const numero = 3
 
+    const VamosAver = []
+    const VamosAverUser = []
 
     const handlesearch = () => {
-        axios.get(UrlApi + "/users/numero")
+        axios.get(UrlApi + "/shoppingcarts")
             .then(response => {
 
                 setUser(response.data)
-                setrefresh(true)
-
-                // setrefresh(true)
-
+                {VamosAver.push(response.data)}
+                console.log(VamosAver)
             }).catch(err => {
-              
+
                 console.log(err)
             })
     }
 
-    const VamosAver = [User]
+
 
     // useEffect(() =>{
-    //     console.log(VamosAver)
-    //     setrefresh(false)
     //     handlesearch()
-    // },[refresh])
+    //   console.log(VamosAver)
+
+    // },[handlesearch])
 
 
 
@@ -74,7 +73,7 @@ const customer = ({ customer }) => {
                     fontWeight: '900',
                     alignContent: 'center',
                     backgroundColor: 'black',
-                    
+
                 }}
             >
                 <h1 style={{ color: 'white' }}>Historial de Compra de Cliente</h1>
@@ -110,26 +109,34 @@ const customer = ({ customer }) => {
                     <Avatar src={team2}>
 
                     </Avatar>
-                   {VamosAver.map((name) => (<div key={name.UserId} style={{color: 'white'}}>{name.Name}</div>))}
-                    
+                    {/* {VamosAver.map((name) => (<div key={name.UserId} style={{color: 'white'}}>{name.UserId}</div>))} */}
+                    {/* {VamosAver.push((handlesearch))} */}
+              
+
                 </h3>
                 <TableContainer >
                     <Table sx={{ minWidth: 650 }}>
                         <TableHead>
                             <TableRow >
-                                <TableCell style={{ color: 'white' }}>Productos</TableCell>
+                                <TableCell style={{ color: 'white' }}>ShoppingCartId</TableCell>
+                                <TableCell style={{ color: 'white' }}>UserId</TableCell>
                                 <TableCell style={{ color: 'white' }}>Amount</TableCell>
-                                <TableCell style={{ color: 'white' }}>Fecha</TableCell>
+                                <TableCell style={{ color: 'white' }}>CreationDate</TableCell>
+                                <TableCell style={{ color: 'white' }}>ModificationDate</TableCell>
                                 <TableCell style={{ color: 'white' }}>Status</TableCell>
+                                <TableCell style={{ color: 'white' }}>ShoppingCartProducts</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody >
-                            {posts.map((historia) => (
-                                <TableRow key={historia.Producto}>
-                                    <TableCell style={{ color: 'white' }}>{historia.Producto}</TableCell>
+                            {VamosAver.map((historia) => (
+                                <TableRow key={historia.UserId}>
+                                    <TableCell style={{ color: 'white' }}>{historia.ShoppingCartId}</TableCell>
+                                    <TableCell style={{ color: 'white' }}>{historia.UserId}</TableCell>
                                     <TableCell style={{ color: 'white' }}>{historia.Amount}</TableCell>
-                                    <TableCell style={{ color: 'white' }}>{historia.Fecha}</TableCell>
-                                    <TableCell style={{ color: 'white' }}>{historia.status}</TableCell>
+                                    <TableCell style={{ color: 'white' }}>{historia.CreationDate}</TableCell>
+                                    <TableCell style={{ color: 'white' }}>{historia.ModificationDate}</TableCell>
+                                    <TableCell style={{ color: 'white' }}>{historia.Status}</TableCell>
+                                    <TableCell style={{ color: 'white' }}>{historia.ShoppingCartProducts}</TableCell>
                                 </TableRow>
                             ))}
 

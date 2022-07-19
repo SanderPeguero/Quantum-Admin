@@ -22,6 +22,7 @@ import input from './Dashboard/assets/theme/components/form/input';
 
 
 
+
 const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Image, CreationDate, ModificatioDate, Status, Imagenes, product }) => {
 
     const ColorButton = styled(Button)(({ theme }) => ({
@@ -37,21 +38,40 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
     const theme = useTheme();
     const [personName, setPersonName] = React.useState([]);
 
-    const handleChange = (event) => {
-        const {
-            target: { value },
-        } = event;
-        setPersonName(
-            // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value,
-        );
-    };
+
 
     const [age, setAge] = useState('');
+    const [section, setsection] = useState([])
+    const [category, setcategory] = useState([])
+    const [show, setShow] = useState()
+
+    const handleselectsection = (event) => {
+
+        axios.get("https://quantumswap.herokuapp.com/sections")
+            .then((Response) => {
+                console.log(Response.data)
+                setsection(Response.data)
+            })
+    }
+
+    const handleselectcategory = (event) => {
+        axios.get("https://quantumswap.herokuapp.com/categories")
+            .then((Response) => {
+                console.log(Response.data)
+                setcategory(Response.data)
+
+            })
+    }
+
 
     const handleChangeOffersType = (event) => {
-      setAge(event.target.value);
+      setShow(event.target.value);
     };
+
+    useEffect(() => {
+        handleselectsection()
+        handleselectcategory()
+    },[])
 
     return (
 
@@ -129,15 +149,17 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={age}
-                                        label="Age"
-                                        name ="Age"
+                                        value={show}
+                                        label="Category"
+                                        name ="show"
                                         onChange={handleChangeOffersType}
                                        
                                     >
-                                        <MenuItem value={10} onSelect={()=> setAge("10")}>Ten</MenuItem>
+
+                                        {section.map((seccion) => (<MenuItem key={seccion.SectionId} onSelect={()=> setsection(seccion.Description)}>{seccion.Description}</MenuItem>))}
+                                        {/* <MenuItem value={10} onSelect={()=> setAge("10")}>Ten</MenuItem>
                                         <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem> */}
                                     </Select>
                                 </FormControl>
                             </Box>
@@ -151,31 +173,33 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={age}
-                                        label="Age"
-                                        name ="Age"
+                                        value={category}
+                                        label="Category"
+                                        name ="show"
                                         onChange={handleChangeOffersType}
                                     
                                     >
-                                        <MenuItem value={10} onSelect={()=> setAge("10")}>Ten</MenuItem>
+                                        {category.map((categoria) => (<MenuItem key={categoria.CategoryId} onSelect={()=> setsection(categoria.Description)}>{categoria.Description}</MenuItem>))}
+                                        {/* <MenuItem value={10} onSelect={()=> setAge("10")}>Ten</MenuItem>
                                         <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem> */}
                                     </Select>
                                 </FormControl>
                             </Box>
                         </Grid>
-                        {/* 
+                        
                         <Grid item xs={12} sm={6}>
                         <TextField
                         required
                                 id="filled-number"
-                                label="Stock"
-                                name="CantidadRestante"
+                                label="Descuento"
+                                // name="CantidadRestante"
                                 type="number"
                                 fullWidth
+                                InputProps={{ endAdornment: <InputAdornment  position='end'>%</InputAdornment> }}
                             />
                         </Grid>
-
+{/* 
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
