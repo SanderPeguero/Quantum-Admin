@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Grid, IconButton, Input, Menu, MenuItem, Select } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import DashboardNavbar from "./Dashboard/examples/Navbars/DashboardNavbar";
@@ -16,6 +17,9 @@ import InputLabel from '@mui/material/InputLabel';
 import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import input from './Dashboard/assets/theme/components/form/input';
 
 
@@ -35,42 +39,124 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
 
     const [Id, setId] = useState(0);
 
-    const theme = useTheme();
-    const [personName, setPersonName] = React.useState([]);
+    const [offersTypes, setOffersTypes] = React.useState([])
+    let [offerType, setOfferType] = React.useState('')
+    const [sections, setSections] = React.useState([])
+    let [section, setSection] = React.useState('')
+    const [categories, setCategories] = React.useState([])
+    let [category, setCategory] = React.useState('')
+    const [products, setProducts] = React.useState([])
+    let [itemProduct, setItemProduct] = React.useState('')
+    const [StartDate, setStartDate] = React.useState(new Date())
+    const [EndingDate, setEndingDate] = React.useState(new Date())
 
 
+    const handleChangeOfferType = (event) => {
+        offerType = event.target.value
+        setOfferType(event.target.value)
+        cargarSections()
+    }
 
-    const [age, setAge] = useState('');
-    const [section, setsection] = useState([])
-    const [category, setcategory] = useState([])
-    const [show, setShow] = useState()
+    const handleChangeSection = (event) => {
+        section = event.target.value
+        setSection(event.target.value)
+        cargarCategories(section)
+    }
 
-    const handleselectsection = (event) => {
+    const handleChangeCategory = (event) => {
+        category = event.target.value
+        setCategory(event.target.value)
+        cargarProducts()
+    }
 
-        axios.get("https://quantumswap.herokuapp.com/sections")
+    const handleChangeItemProduct = (event) => {
+        setItemProduct(event.target.value)
+    }
+
+    const handleChangeFromDate = (event) => {
+        setStartDate(event.target.value)
+    }
+
+    const handleChangeUntilDate = (event) => {
+        setEndingDate(event.target.value)
+    }
+
+    const cargarOffersTypes = (event) => {
+        axios.get(UrlApi + "/offertypes")
             .then((Response) => {
                 console.log(Response.data)
-                setsection(Response.data)
+                setOffersTypes(Response.data)
+            })
+            .catch((err) => {
+                console.log(err)
             })
     }
 
-    const handleselectcategory = (event) => {
-        axios.get("https://quantumswap.herokuapp.com/categories")
+    const cargarSections = (event) => {
+        axios.get(UrlApi + "/sections")
             .then((Response) => {
                 console.log(Response.data)
-                setcategory(Response.data)
-
+                setSections(Response.data)
+            })
+            .catch((err) => {
+                console.log(err)
             })
     }
 
+    const cargarCategories = (event) => {
+        axios.get(UrlApi + "/categories/listbysection/" + section)
+            .then((Response) => {
+                console.log(Response.data)
+                setCategories(Response.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
-    const handleChangeOffersType = (event) => {
-      setShow(event.target.value);
-    };
+    const cargarProducts = (event) => {
+        axios.get(UrlApi + "/products/listbycategory/" + category)
+            .then((Response) => {
+                console.log(Response.data)
+                setProducts(Response.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const handlesubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        let objData = {
+            OfferId: data.get('OfferId'),
+            OfferTypeId: data.get('OfferTypeId'),
+            Description: data.get('Description'),
+            Discount: data.get('Discount'),
+            StartDate: StartDate.toISOString().slice(0, 19).replace('T', ' '),
+            EndingDate: EndingDate.toISOString().slice(0, 19).replace('T', ' ')
+        };
+
+        if (objData.OfferTypeId == 4) {
+            objData.EntityId = data.get('SectionId')
+        } else if (objData.OfferTypeId == 14) {
+            objData.EntityId = data.get('CategoryId')
+        } else if (objData.OfferTypeId == 24) {
+            objData.EntityId = data.get('ProductId')
+        }
+        axios.put(UrlApi + "/offers", objData)
+            .then((Response) => {
+                if (Response.data.Executed) {
+                    document.getElementById('formOffers').reset()
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
     useEffect(() => {
-        handleselectsection()
-        handleselectcategory()
+        cargarOffersTypes()
     },[])
 
     return (
@@ -108,15 +194,15 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                 </Typography>
                 <br />
 
-                <Box component="form" noValidate>
+                <Box id="formOffers" component="form" noValidate onSubmit={handlesubmit}>
 
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
-                                id="filled-number"
-                                label="OffersId"
-                                name="OffersId"
+                                id="OfferId"
+                                label="OfferId"
+                                name="OfferId"
                                 value={Id}
                                 type="number"
                                 fullWidth
@@ -129,17 +215,45 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                             </ColorButton>
                         </Grid>
 
-
-
-                        <Grid item xs={12} >
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 required
                                 fullWidth
-                                id="filled"
+                                id="Description"
                                 label="Description"
                                 name="Description"
-
+                                autoComplete='off'
                             />
+                        </Grid>
+
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                required
+                                id="Discount"
+                                label="Discount"
+                                name="Discount"
+                                type="number"
+                                fullWidth
+                                InputProps={{ endAdornment: <InputAdornment  position='end'>%</InputAdornment> }}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sm={6}>
+                            <Box >
+                                <FormControl fullWidth>
+                                    <InputLabel required>Offer Type</InputLabel>
+                                    <Select
+                                        required
+                                        value={offerType}
+                                        label="OfferType"
+                                        name ="OfferTypeId"
+                                        id="OfferTypeId"
+                                        onChange={handleChangeOfferType}
+                                    >
+                                        {offersTypes.map((element) => (<MenuItem key={element.OfferTypeId} value={element.OfferTypeId}>{element.Description}</MenuItem>))}
+                                    </Select>
+                                </FormControl>
+                            </Box>
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
@@ -147,19 +261,14 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                 <FormControl fullWidth>
                                     <InputLabel >Section</InputLabel>
                                     <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={show}
-                                        label="Category"
-                                        name ="show"
-                                        onChange={handleChangeOffersType}
+                                        value={section}
+                                        label="Section"
+                                        name="SectionId"
+                                        id="SectionId"
+                                        onChange={handleChangeSection}
                                        
                                     >
-
-                                        {section.map((seccion) => (<MenuItem key={seccion.SectionId} onSelect={()=> setsection(seccion.Description)}>{seccion.Description}</MenuItem>))}
-                                        {/* <MenuItem value={10} onSelect={()=> setAge("10")}>Ten</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem> */}
+                                        {sections.map((element) => (<MenuItem key={element.SectionId} value={element.SectionId}>{element.Description}</MenuItem>))}
                                     </Select>
                                 </FormControl>
                             </Box>
@@ -171,33 +280,60 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                 <FormControl fullWidth>
                                     <InputLabel >Category</InputLabel>
                                     <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
                                         value={category}
                                         label="Category"
-                                        name ="show"
-                                        onChange={handleChangeOffersType}
+                                        name ="CategoryId"
+                                        id='CategoryId'
+                                        onChange={handleChangeCategory}
                                     
                                     >
-                                        {category.map((categoria) => (<MenuItem key={categoria.CategoryId} onSelect={()=> setsection(categoria.Description)}>{categoria.Description}</MenuItem>))}
-                                        {/* <MenuItem value={10} onSelect={()=> setAge("10")}>Ten</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem> */}
+                                        {categories.map((element) => (<MenuItem key={element.CategoryId} value={element.CategoryId}>{element.Description}</MenuItem>))}
                                     </Select>
                                 </FormControl>
                             </Box>
                         </Grid>
-                        
+
                         <Grid item xs={12} sm={6}>
-                        <TextField
-                        required
-                                id="filled-number"
-                                label="Descuento"
-                                // name="CantidadRestante"
-                                type="number"
-                                fullWidth
-                                InputProps={{ endAdornment: <InputAdornment  position='end'>%</InputAdornment> }}
-                            />
+                            <Box sx={{ minWidth: 120 }} style={{padding: '0'}}>
+                                <FormControl fullWidth>
+                                    <InputLabel >Product</InputLabel>
+                                    <Select
+                                        value={itemProduct}
+                                        label="Product"
+                                        name="ProductId"
+                                        id="ProductId"
+                                        onChange={handleChangeItemProduct}
+                                    
+                                    >
+                                        {products.map((element) => (<MenuItem key={element.ProductId} value={element.ProductId}>{element.Description}</MenuItem>))}
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                        </Grid>
+
+                        <Grid item xs={12} sm={6}>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
+                                    label="From"
+                                    value={StartDate}
+                                    id="StartDate"
+                                    name="StartDate"
+                                    onChange={handleChangeFromDate}
+                                />
+                            </LocalizationProvider>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DateTimePicker
+                                    renderInput={(props) => <TextField {...props} />}
+                                    label="Until"
+                                    value={EndingDate}
+                                    id="EndingDate"
+                                    name="EndingDate"
+                                    onChange={handleChangeUntilDate}
+                                />
+                            </LocalizationProvider>
                         </Grid>
 {/* 
                         <Grid item xs={12} sm={6}>
@@ -244,7 +380,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                             New
                         </Button>
                         <Button
-                            // type="submit"
+                            type='submit'
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
