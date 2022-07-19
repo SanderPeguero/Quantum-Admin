@@ -21,6 +21,7 @@ import Customer from './Historial/Customer/Customer'
 import DataPrueba from './Historial/DataPrueba'
 // import MDBox from "../Dashboard/components/MDBox";
 import MDBox from './Dashboard/components/MDBox'
+import UrlApi from '../globals';
 
 
 const ShoppingHistory = () => {
@@ -41,7 +42,7 @@ const ShoppingHistory = () => {
         let objData = {
             Email: data.get('id'),
           };
-        axios.get("https://quantumswap.herokuapp.com/users", objData)
+        axios.get(UrlApi + "/users", objData)
             .then(response => {
 
                 setUser(response.data)

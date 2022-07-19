@@ -3,6 +3,7 @@ import { Box } from '@mui/system'
 import { react, useState, useEffect } from 'react'
 import team2 from '../../Dashboard/assets/images/team-2.jpg'
 import axios from 'axios'
+import UrlApi from '../../../globals'
 
 
 const customer = ({ customer }) => {
@@ -22,7 +23,7 @@ const customer = ({ customer }) => {
 
 
     const handlesearch = () => {
-        axios.get("https://quantumswap.herokuapp.com/users/numero")
+        axios.get(UrlApi + "/users/numero")
             .then(response => {
 
                 setUser(response.data)

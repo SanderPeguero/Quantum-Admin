@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { HashRouter as Router, Routes, Route, Link } from "react-router-dom"
 import Dashboard from './Component/Dashboard/Dashboard.jsx'
 import './Styles.css'
+import UrlApi from './globals.jsx'
 // import axios from 'axios'
 import HistoryCustomer from './Component/Historial/HistoryCustomer.jsx'
 
@@ -40,7 +41,7 @@ const App = () => {
 
     const getProducts = () => {
 
-        axios.get("https://quantumswap.herokuapp.com/products/")
+        axios.get(UrlApi + "/products/")
 
             .then(response => {
 

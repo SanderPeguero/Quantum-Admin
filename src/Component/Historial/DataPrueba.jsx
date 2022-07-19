@@ -1,13 +1,14 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow , Button} from '@mui/material';
 import { Box } from '@mui/system';
 import {react} from 'react'
+import UrlApi from '../../globals';
 
 const Dataprueba = () => {
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put("https://quantumswap.herokuapp.com/shoppingcarts")
+        axios.put(UrlApi + "/shoppingcarts")
             .then((response) => {
                 console.log(response.data)
             })

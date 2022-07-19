@@ -53,7 +53,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
             Image: data.get('QRCode')
         };
 
-        axios.put("https://quantumswap.herokuapp.com/products", objData)
+        axios.put(UrlApi + "/products", objData)
             .then((response) => {
                 console.log(response.data)
             })
