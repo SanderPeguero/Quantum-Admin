@@ -10,9 +10,9 @@ import DataTable from '../Dashboard/examples/Tables/DataTable'
 import DataHistoryTable from "./DataHistoryTable";
 
 
-const HistoryShopping = () => {
+const HistoryShopping = ({User}) => {
 
-  const { columns: pColumns, rows: pRows } = DataHistoryTable(); 
+  const { columns: pColumns, rows: pRows } = DataHistoryTable(User); 
 
   //Mira, la idea mia es la siguiente
   //1-Se hace la llamada a los datos con el axios en el DataHistoryTable

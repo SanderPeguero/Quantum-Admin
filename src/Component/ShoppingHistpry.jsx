@@ -22,6 +22,7 @@ import DataPrueba from './Historial/DataPrueba'
 // import MDBox from "../Dashboard/components/MDBox";
 import MDBox from './Dashboard/components/MDBox'
 import UrlApi from '../globals';
+import DataHistory from './Historial/DataHistoryTable'
 
 
 const ShoppingHistory = () => {
@@ -243,9 +244,12 @@ const ShoppingHistory = () => {
                             textAlign: 'left',
                         }}>
                             {/* <TablaContent></TablaContent> */}
-                            <HistoryUser></HistoryUser>
+                            <HistoryUser User={User}></HistoryUser>
                             {/* <Customer></Customer> */}
                             {/* <DataPrueba></DataPrueba> */}
+
+                            <DataHistory User={User}/>
+                            
                           
                         </MDBox>
                     </Grid>

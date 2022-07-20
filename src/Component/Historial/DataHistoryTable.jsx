@@ -1,3 +1,7 @@
+import { useEffect, useState } from 'react'
+import UrlApi from '../../globals'
+import axios from 'axios'
+
 // @mui material components
 import Icon from "@mui/material/Icon";
 
@@ -15,16 +19,8 @@ import logoSlack from "../Dashboard/assets/images/small-logos/logo-slack.svg";
 import logoSpotify from "../Dashboard/assets/images/small-logos/logo-spotify.svg";
 import logoInvesion from "../Dashboard/assets/images/small-logos/logo-invision.svg";
 
-export default function data() {
+export default function data({User}) {
 
-const datacliente = [
-  {Nombre: 'Jose Alberto', Emaail: 'josegonzalez@gmail.com', Realizado: 7, Devueltoss: 4}
-]
-
-
-
-
-  
   const Project = ({ image, name }) => (
 
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -50,51 +46,79 @@ const datacliente = [
   );
 
 
+  let [shoppingCarts, setShoppingCarts] = useState([])
+  const [rows, setRows] = useState([])
+
+  const loadShoppingCarts = (event) => {
+    axios.get(UrlApi + "/shoppingcarts")
+        .then((Response) => {
+          shoppingCarts = Response.data
+          setShoppingCarts(Response.data)
+          let tmpArr = new Array()
+
+          shoppingCarts.map((element) => {
+            tmpArr.push({
+              ID: (
+                <MDTypography component="a"  variant="button" color="text" fontWeight="medium">
+                {element.ShoppingCartId}
+                </MDTypography>
+              ),
+              Customer: (
+                <MDTypography component="a"  variant="button" color="text" fontWeight="medium">
+                {element.UserName}
+                </MDTypography>
+              ),
+              TotalProducts: (
+                <MDTypography component="a" variant="button" color="text" fontWeight="medium">
+                  {element.TotalProducts}
+                </MDTypography>
+              ),
+              Amount: (
+                <MDTypography component="a"  variant="caption" color="text" fontWeight="medium">
+                  {element.Amount}
+                </MDTypography>
+              ),
+              Date: (
+                <MDTypography component="a"  variant="caption" color="text" fontWeight="medium">
+                  {element.CreationDate}
+                </MDTypography>
+              ),
+              action: (
+                <MDTypography component="a"   href="#/Historycust" color="text">
+                  <Icon >visibility</Icon>
+                </MDTypography>
+              )
+            })
+          })
+
+          setRows(tmpArr)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+  }
+
+  useEffect(() => {
+    loadShoppingCarts()
+  }, [])
+
+
 
   return {
 
     
     columns: [
 
-      { Header: "Nombre", accessor: "project", width: "30%", align: "left" },
-      { Header: "Email", accessor: "budget", align: "left" },
-      { Header: "Pedidos Realizados", accessor: "realizados", align: "center" },
-      { Header: "Pedidos Devueltos", accessor: "devueltos", align: "center" },
+      { Header: "ID", accessor: "ID", align: "left" },
+      { Header: "Customer", accessor: "Customer", align: "left" },
+      { Header: "Products", accessor: "TotalProducts", align: "center" },
+      { Header: "Amount", accessor: "Amount", align: "center" },
+      { Header: "Date", accessor: "Date", align: "left" },
       { Header: "action", accessor: "action", align: "center" }
 
     ],
 
-  
-
-    rows: [
-      {
-        project: (
-          <MDTypography component="a"  variant="button" color="text" fontWeight="medium">
-          Jose Alberto
-        </MDTypography>
-        ),
-        budget: (
-          <MDTypography component="a" variant="button" color="text" fontWeight="medium">
-            josealberto@gmail.com
-          </MDTypography>
-        ),
-        realizados: (
-          <MDTypography component="a"  variant="caption" color="text" fontWeight="medium">
-            7
-          </MDTypography>
-        ),
-        devueltos: (
-          <MDTypography component="a"  variant="caption" color="text" fontWeight="medium">
-            7
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a"   href="#/Historycust" color="text">
-            <Icon >visibility</Icon>
-          </MDTypography>
-        )
-      }
-    ]
+    rows: rows
 
   };
 }
