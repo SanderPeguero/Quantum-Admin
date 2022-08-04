@@ -8,41 +8,51 @@ import UrlApi from '../../../globals'
 
 const customer = ({ customer }) => {
 
-    const posts = [
-        { Producto: 'Lentes', Amount: 250, Fecha: '25/6/2022', status: 'Recibido' },
-        { Producto: 'GameBoy Colorr', Amount: 500, Fecha: '25/6/2022', status: 'Recibido' },
-        { Producto: 'Headset', Amount: 500, Fecha: '25/6/2022', status: 'Devuelto' },
-        { Producto: 'DJI Inspire 1', Amount: 500, Fecha: '25/6/2022', status: 'Recibido' },
-        { Producto: 'Mac Book', Amount: 500, Fecha: '25/6/2022', status: 'Recibido' }
-    ];
 
-    const [User, setUser] = useState([]);
-    const [refresh, setrefresh] = useState(false)
-
-
-    const VamosAver = []
-    const VamosAverUser = []
+    let [User, setUser] = useState([]);
+    const [table, settable] = useState([])
+    const [search, setSearch] = useState("")
+    
+    let tmpArr = new Array()
 
     const handlesearch = () => {
-        axios.get(UrlApi + "/shoppingcarts")
-            .then(response => {
+        axios.get("https://quantumswap.herokuapp.com/shoppingcarts")
+            .then(Response => {
+                User = Response.data
+                setUser(Response.data)
+                settable(Response.data)
 
-                setUser(response.data)
-                {VamosAver.push(response.data)}
-                console.log(VamosAver)
             }).catch(err => {
 
                 console.log(err)
             })
     }
 
+    const handleChange=e=>{
+        setSearch(e.target.value)
+        filtrar(e.target.value)
+
+    }
+
+    const filtrar = (terminos)=>{
+        var resultadp = table.filter((element)=>{
+            if(element.UserName.toString().toLowerCase().includes(terminos.toLowerCase())
+            || element.UserName.toString().toLowerCase().includes(terminos.toLowerCase()))
+            {
+                return resultadp
+            }
+        })
+        setUser(resultadp)
+        console.log(resultadp);
+    }
 
 
-    // useEffect(() =>{
-    //     handlesearch()
-    //   console.log(VamosAver)
 
-    // },[handlesearch])
+    useEffect(() => {
+        handlesearch()
+        console.log(User)
+
+    }, [])
 
 
 
@@ -77,7 +87,7 @@ const customer = ({ customer }) => {
                 }}
             >
                 <h1 style={{ color: 'white' }}>Historial de Compra de Cliente</h1>
-                <Button onClick={handlesearch}>Mostrar</Button>
+
             </Box>
             <Box
                 sx={{
@@ -111,32 +121,39 @@ const customer = ({ customer }) => {
                     </Avatar>
                     {/* {VamosAver.map((name) => (<div key={name.UserId} style={{color: 'white'}}>{name.UserId}</div>))} */}
                     {/* {VamosAver.push((handlesearch))} */}
-              
+
 
                 </h3>
+                <input
+                    value={search}
+                    onChange={handleChange}
+                    placeholder="Search"
+                />
                 <TableContainer >
                     <Table sx={{ minWidth: 650 }}>
                         <TableHead>
                             <TableRow >
                                 <TableCell style={{ color: 'white' }}>ShoppingCartId</TableCell>
-                                <TableCell style={{ color: 'white' }}>UserId</TableCell>
+                                <TableCell style={{ color: 'white' }}>UserName</TableCell>
+                                {/* <TableCell style={{color: 'white'}}>Product</TableCell> */}
                                 <TableCell style={{ color: 'white' }}>Amount</TableCell>
                                 <TableCell style={{ color: 'white' }}>CreationDate</TableCell>
-                                <TableCell style={{ color: 'white' }}>ModificationDate</TableCell>
-                                <TableCell style={{ color: 'white' }}>Status</TableCell>
-                                <TableCell style={{ color: 'white' }}>ShoppingCartProducts</TableCell>
+                                {/* <TableCell style={{ color: 'white' }}>ModificationDate</TableCell> */}
+                                {/* <TableCell style={{ color: 'white' }}>Status</TableCell> */}
+                                {/* <TableCell style={{ color: 'white' }}>ShoppingCartProducts</TableCell> */}
                             </TableRow>
                         </TableHead>
                         <TableBody >
-                            {VamosAver.map((historia) => (
-                                <TableRow key={historia.UserId}>
+                            {User && User.map((historia) => (
+                                <TableRow key={historia.ShoppingCartId}>
                                     <TableCell style={{ color: 'white' }}>{historia.ShoppingCartId}</TableCell>
-                                    <TableCell style={{ color: 'white' }}>{historia.UserId}</TableCell>
+                                    <TableCell style={{ color: 'white' }}>{historia.UserName}</TableCell>
+                                    {/* <TableCell style={{ color: 'white' }}>{historia.ShoppingCartProducts}</TableCell> */}
                                     <TableCell style={{ color: 'white' }}>{historia.Amount}</TableCell>
                                     <TableCell style={{ color: 'white' }}>{historia.CreationDate}</TableCell>
-                                    <TableCell style={{ color: 'white' }}>{historia.ModificationDate}</TableCell>
-                                    <TableCell style={{ color: 'white' }}>{historia.Status}</TableCell>
-                                    <TableCell style={{ color: 'white' }}>{historia.ShoppingCartProducts}</TableCell>
+                                    {/* <TableCell style={{ color: 'white' }}>{historia.ModificationDate}</TableCell> */}
+                                    {/* <TableCell style={{ color: 'white' }}>{historia.Status}</TableCell> */}
+                                    {/* <TableCell style={{ color: 'white' }}>{historia.ShoppingCartProducts}</TableCell> */}
                                 </TableRow>
                             ))}
 

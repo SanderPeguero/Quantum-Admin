@@ -23,6 +23,7 @@ import DataPrueba from './Historial/DataPrueba'
 import MDBox from './Dashboard/components/MDBox'
 import UrlApi from '../globals';
 import DataHistory from './Historial/DataHistoryTable'
+import { async } from 'regenerator-runtime';
 
 
 const ShoppingHistory = () => {
@@ -36,17 +37,20 @@ const ShoppingHistory = () => {
     }));
 
     const [User, setUser] = useState([])
+    const [tableusuario, setTableusuarios] = useState([])
+    const [search, setSearch] = useState("")
 
-    const handlesearch = (event) => {
+    const handlesearch = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         let objData = {
             Email: data.get('id'),
-          };
-        axios.get(UrlApi + "/users", objData)
+        };
+        await axios.get(UrlApi + "/users", objData)
             .then(response => {
 
                 setUser(response.data)
+                setTableusuarios(response.data)
                 // console.log(response.data)
 
             }).catch(err => {
@@ -62,13 +66,22 @@ const ShoppingHistory = () => {
 
 
 
-    // useEffect(() => {
+    const handleChange = e => {
+        setSearch(e.target.value)
+        console.log(e.target.value)
+    }
 
-    //     peticionGet();
+    // const filtrar=(terminoBusqueda)=>{
+    //     var resultadosBusqueda=tableusuario.filter((elemento)=>{
+    //       if(elemento.ShoppingCartId.includes(terminoBusqueda)
+    //       || elemento.UserName.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+    //       ){
+    //         return elemento;
+    //       }
+    //     });
+    //     setUser(resultadosBusqueda);
+    //   }
 
-
-
-    // }, [handleSubmit])
 
 
 
@@ -175,55 +188,20 @@ const ShoppingHistory = () => {
 
                         }}>
                             <Grid container spacing={6}>
-                                <Grid item xs={12} sm={3}>
+                                <Grid item xs={12} sm={8}>
                                     <TextField
                                         fullWidth
-                                        id='name'
-                                        type="string"
-                                        label="User Name"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        
+                                        id="serch"
+                                        label="Search"
+                                        type="serch"
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={3}>
-                                    <TextField
-                                        fullWidth
-                                        id="outlined-number"
-                                        label=" Desde"
-                                        type='date'
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={3}>
-                                    <TextField
-                                        fullWidth
-                                        id="outlined-number"
-                                        label="Fecha Hasta"
-                                        type='date'
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
+
                                 </Grid>
                                 <Grid item xs={12} sm={3}>
                                     <ColorButton variant="outlined" >
                                         <SearchIcon sx={{ fontSize: 40 }}></SearchIcon>
                                     </ColorButton>
                                 </Grid >
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        fullWidth
-                                        id="email"
-                                        label="Email"
-                                        type="email"
-                                    />
-
-                                </Grid>
                             </Grid>
                         </MDBox>
                         <MDBox sx={{
@@ -244,13 +222,16 @@ const ShoppingHistory = () => {
                             textAlign: 'left',
                         }}>
                             {/* <TablaContent></TablaContent> */}
-                            <HistoryUser User={User}></HistoryUser>
+
+                            <HistoryUser search={search}></HistoryUser>
+
+
                             {/* <Customer></Customer> */}
                             {/* <DataPrueba></DataPrueba> */}
 
-                            <DataHistory User={User}/>
-                            
-                          
+                            {/* <DataHistory User={User}/> */}
+
+
                         </MDBox>
                     </Grid>
                 </MDBox>

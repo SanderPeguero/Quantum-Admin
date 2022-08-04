@@ -19,7 +19,7 @@ import logoSlack from "../Dashboard/assets/images/small-logos/logo-slack.svg";
 import logoSpotify from "../Dashboard/assets/images/small-logos/logo-spotify.svg";
 import logoInvesion from "../Dashboard/assets/images/small-logos/logo-invision.svg";
 
-export default function data({User}) {
+export default function data({ search }) {
 
   const Project = ({ image, name }) => (
 
@@ -50,7 +50,7 @@ export default function data({User}) {
   const [rows, setRows] = useState([])
 
   const loadShoppingCarts = (event) => {
-    axios.get(UrlApi + "/shoppingcarts")
+    axios.get("https://quantumswap.herokuapp.com/shoppingcarts")
         .then((Response) => {
           shoppingCarts = Response.data
           setShoppingCarts(Response.data)
@@ -98,15 +98,21 @@ export default function data({User}) {
         })
   }
 
+
+
   useEffect(() => {
+
     loadShoppingCarts()
-  }, [])
+
+    console.log(search + "Aqui en la data")
+    
+  }, [search])
 
 
 
   return {
 
-    
+
     columns: [
 
       { Header: "ID", accessor: "ID", align: "left" },

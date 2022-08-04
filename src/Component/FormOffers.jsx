@@ -22,6 +22,17 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import input from './Dashboard/assets/theme/components/form/input';
 
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+
+// import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
+
+
+
+
+
 
 
 
@@ -38,15 +49,20 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
     }));
 
     const [Id, setId] = useState(0);
+    const [activar, setActivar] = useState(0)
 
     const [offersTypes, setOffersTypes] = React.useState([])
     let [offerType, setOfferType] = React.useState('')
+
     const [sections, setSections] = React.useState([])
     let [section, setSection] = React.useState('')
+
     const [categories, setCategories] = React.useState([])
     let [category, setCategory] = React.useState('')
+
     const [products, setProducts] = React.useState([])
     let [itemProduct, setItemProduct] = React.useState('')
+
     const [StartDate, setStartDate] = React.useState(new Date())
     const [EndingDate, setEndingDate] = React.useState(new Date())
 
@@ -148,6 +164,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
             .then((Response) => {
                 if (Response.data.Executed) {
                     document.getElementById('formOffers').reset()
+
                 }
             })
             .catch((err) => {
@@ -157,7 +174,9 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
 
     useEffect(() => {
         cargarOffersTypes()
-    },[])
+    }, [])
+
+    const [open, setOpen] = React.useState(true);
 
     return (
 
@@ -234,7 +253,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                 name="Discount"
                                 type="number"
                                 fullWidth
-                                InputProps={{ endAdornment: <InputAdornment  position='end'>%</InputAdornment> }}
+                                InputProps={{ endAdornment: <InputAdornment position='end'>%</InputAdornment> }}
                             />
                         </Grid>
 
@@ -246,7 +265,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                         required
                                         value={offerType}
                                         label="OfferType"
-                                        name ="OfferTypeId"
+                                        name="OfferTypeId"
                                         id="OfferTypeId"
                                         onChange={handleChangeOfferType}
                                     >
@@ -266,26 +285,26 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                         name="SectionId"
                                         id="SectionId"
                                         onChange={handleChangeSection}
-                                       
+
                                     >
                                         {sections.map((element) => (<MenuItem key={element.SectionId} value={element.SectionId}>{element.Description}</MenuItem>))}
                                     </Select>
                                 </FormControl>
                             </Box>
-                            
+
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <Box sx={{ minWidth: 120 }} style={{padding: '0'}}>
+                            <Box sx={{ minWidth: 120 }} style={{ padding: '0' }}>
                                 <FormControl fullWidth>
                                     <InputLabel >Category</InputLabel>
                                     <Select
                                         value={category}
                                         label="Category"
-                                        name ="CategoryId"
+                                        name="CategoryId"
                                         id='CategoryId'
                                         onChange={handleChangeCategory}
-                                    
+
                                     >
                                         {categories.map((element) => (<MenuItem key={element.CategoryId} value={element.CategoryId}>{element.Description}</MenuItem>))}
                                     </Select>
@@ -294,7 +313,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <Box sx={{ minWidth: 120 }} style={{padding: '0'}}>
+                            <Box sx={{ minWidth: 120 }} style={{ padding: '0' }}>
                                 <FormControl fullWidth>
                                     <InputLabel >Product</InputLabel>
                                     <Select
@@ -303,7 +322,7 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                         name="ProductId"
                                         id="ProductId"
                                         onChange={handleChangeItemProduct}
-                                    
+
                                     >
                                         {products.map((element) => (<MenuItem key={element.ProductId} value={element.ProductId}>{element.Description}</MenuItem>))}
                                     </Select>
@@ -335,31 +354,6 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                 />
                             </LocalizationProvider>
                         </Grid>
-{/* 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                required
-                                id="filled-number"
-                                label="Price"
-                                name="Precio"
-                                type="number"
-                                fullWidth
-                                InputProps={{ startAdornment: <InputAdornment position='start'>$</InputAdornment> }}
-
-                            />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                required
-                                id="filled-number"
-                                label="Discount"
-                                name="Descuento"
-                                type="number"
-                                fullWidth
-                                InputProps={{ endAdornment: <InputAdornment position='end'>%</InputAdornment> }}
-                            />
-                        </Grid>*/}
 
                     </Grid>
 
@@ -384,12 +378,15 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            // color="success" 
                             style={{
                                 marginRight: '1rem',
                                 width: '80px',
                                 color: 'white',
                                 background: 'green'
+                            }}
+                            onClick={() => {
+
+                                setActivar(0 + 1);
                             }}
                         >
                             Guardar
@@ -403,29 +400,34 @@ const FormOfertas = ({ ProductId, Description, Stock, Cost, Price, Discount, Ima
                                 color: 'white',
                                 background: 'red',
                             }}
+
                         >
                             Delete
                         </Button>
                     </Box>
+                    {activar == 1 && <Box sx={{ width: '100%' }}>
+                        <Collapse in={open}>
+                            <Alert
+                                action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            setOpen(false);
+                                        }}
+                                    >
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                                sx={{ mb: 2 }}
+                            >
+                               The offer has been saved successfully
+                            </Alert>
+                        </Collapse>
+                    </Box>}
 
                 </Box>
-{/* 
-                <Box sx={{ minWidth: 120 }}>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                        <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        // onChange={handleChange}
-                        >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Box> */}
             </Box>
         </>
     )

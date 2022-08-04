@@ -12,7 +12,22 @@ import { styled } from '@mui/material/styles';
 import { indigo } from '@mui/material/colors';
 import UrlApi from '../globals'
 import InputAdornment from '@mui/material/InputAdornment';
+import Modal from '@mui/material/Modal';
+import Products from './Products/ProductsTable'
+import { async } from 'regenerator-runtime';
 
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 700,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 
 
@@ -46,6 +61,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
         let objData = {
             ProductId: data.get('IDProducto'),
             Description: data.get('Descripcion'),
+            CategoryId: data.get('CategoryId'),
             Stock: data.get('CantidadRestante'),
             Cost: data.get('Costo'),
             Price: data.get('Precio'),
@@ -53,12 +69,27 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
             Image: data.get('QRCode')
         };
 
-        axios.put(UrlApi + "/products", objData)
+        axios.put("https://quantumswap.herokuapp.com/products", objData)
             .then((response) => {
                 console.log(response.data)
+                document.getElementById('formproduct').reset()
             })
             .catch((err) => { });
     };
+
+    let [Pproduct, setPproduct] = useState([])
+
+    const PeticionesGet = async() =>{
+        await axios.get("https://quantumswap.herokuapp.com/products")
+            .then((Response)=>{
+                Pproduct = Response.data
+                setPproduct(Response.data)
+            })
+    }
+
+    useEffect(()=>{
+        PeticionesGet()
+    },[])
 
 
     const [values, setValues] = React.useState({
@@ -120,7 +151,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
 
 
     const [Id, setId] = useState();
-    
+
 
 
 
@@ -141,6 +172,11 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
         console.log(newImgs);
         setImages(newImgs);
     }
+
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
 
@@ -175,9 +211,9 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                 <Typography variant="h1" gutterBottom style={{ color: 'white' }}>
                     Product Registrations
                 </Typography>
-                <br/>
+                <br />
 
-                <Box component="form" noValidate onSubmit={handleSubmit} >
+                <Box component="form" id="formproduct" noValidate onSubmit={handleSubmit} >
 
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
@@ -193,9 +229,38 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                         </Grid>
 
                         <Grid item xs={12} sm={1}>
-                            <ColorButton variant="outlined" >
+                            <ColorButton variant="outlined" onClick={handleOpen}>
                                 <SearchIcon sx={{ fontSize: 50 }}></SearchIcon>
                             </ColorButton>
+
+                            <div>
+                                {/* <Button onClick={handleOpen}>Open modal</Button> */}
+                                <Modal
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box
+                                        sx={{
+                                            width: 850,
+                                            background: 'black',
+                                            alignItems: 'center',
+                                            margin: '20rem',
+                                            marginTop: '1rem',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            mx: 'auto',
+                                            // p: 1,
+                                            // m: 4,
+                                            
+                                        }}
+                                    >
+                                        <Products Pproduct={Pproduct}></Products>
+                                    </Box>
+                                </Modal>
+                            </div>
+
                         </Grid>
 
 
@@ -207,6 +272,17 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                                 id="filled"
                                 label="Descripcion"
                                 name="Descripcion"
+
+                            />
+                        </Grid>
+                        
+                        <Grid item xs={12} >
+                            <TextField
+                                required
+                                fullWidth
+                                id="filled"
+                                label="Category"
+                                name="CategoryId"
 
                             />
                         </Grid>
@@ -274,7 +350,7 @@ const FormProducts = ({ ProductId, Description, Stock, Cost, Price, Discount, Im
                     </Grid>
 
                     <Box
-                    
+
                     >
                         <Button
                             variant="contained"
