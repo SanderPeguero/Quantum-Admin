@@ -53,7 +53,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Authors Table
+                  Authors Team Quntum
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
@@ -68,7 +68,7 @@ function Tables() {
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card>
+            {/* <Card>
               <MDBox
                 mx={2}
                 mt={-3}
@@ -92,7 +92,7 @@ function Tables() {
                   noEndBorder
                 />
               </MDBox>
-            </Card>
+            </Card> */}
           </Grid>
         </Grid>
       </MDBox>

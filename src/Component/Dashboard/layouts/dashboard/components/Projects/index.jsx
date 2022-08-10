@@ -31,6 +31,8 @@ import DataTable from "../../../../examples/Tables/DataTable";
 // Data
 import data from "../../../../layouts/dashboard/components/Projects/data";
 
+import logo from '../../../../../../../Logo.png'
+
 function Projects() {
   const { columns, rows } = data();
   const [menu, setMenu] = useState(null);
@@ -63,11 +65,11 @@ function Projects() {
     <Card>
       <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
         <MDBox>
-          <MDTypography variant="h6" gutterBottom>
-            Projects
+          <MDTypography variant="h3" gutterBottom>
+            Quantum Swap Admin
           </MDTypography>
           <MDBox display="flex" alignItems="center" lineHeight={0}>
-            <Icon
+            {/* <Icon
               sx={{
                 fontWeight: "bold",
                 color: ({ palette: { info } }) => info.main,
@@ -75,10 +77,10 @@ function Projects() {
               }}
             >
               done
-            </Icon>
-            <MDTypography variant="button" fontWeight="regular" color="text">
+            </Icon> */}
+            {/* <MDTypography variant="button" fontWeight="regular" color="text">
               &nbsp;<strong>30 done</strong> this month
-            </MDTypography>
+            </MDTypography> */}
           </MDBox>
         </MDBox>
         <MDBox color="text" px={2}>
@@ -88,14 +90,28 @@ function Projects() {
         </MDBox>
         {renderMenu}
       </MDBox>
-      <MDBox>
-        <DataTable
+      <MDBox  >
+        <MDTypography variant="h4"
+          sx={{
+            width: 850,
+            alignItems: 'center',
+            margin: '2rem',
+            marginTop: '1rem',
+            display: 'flex',
+            flexDirection: 'column',
+            mx: 'auto',
+          }}>
+          Welcome to Quantum Swap Admin
+          <img   src={logo} alt="" style={{ height: '10.6rem', width: '11rem' }} />
+        </MDTypography>
+    
+        {/* <DataTable
           table={{ columns, rows }}
           showTotalEntries={false}
           isSorted={false}
           noEndBorder
           entriesPerPage={false}
-        />
+        /> */}
       </MDBox>
     </Card>
   );

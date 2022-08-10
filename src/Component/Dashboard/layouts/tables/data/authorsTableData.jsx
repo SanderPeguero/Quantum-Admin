@@ -53,16 +53,17 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "Cliente", accessor: "author", width: "45%", align: "left" },
-      { Header: "firstName", accessor: "function", align: "left" },
-      { Header: "lastName", accessor: "employed", align: "center" },
+      { Header: "Team Quantum", accessor: "author", width: "45%", align: "left" },
+      { Header: "Function", accessor: "function", align: "left" },
+      { Header: "Employed", accessor: "employed", align: "center" },
       { Header: "status", accessor: "status", align: "center" },
-      { Header: "Show", accessor: "action", align: "center" },
+      // { Header: "Show", accessor: "action", align: "center" },
     ],
 
     rows: [
+      //--------------------------------------------------------------------
       {
-        author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
+        author: <Author image={team2} name="Sander Peguero" email="sander@quantum.com" />,
         function: <Job title="Manager" description="Organization" />,
         status: (
           <MDBox ml={-1}>
@@ -71,36 +72,18 @@ export default function data() {
         ),
         employed: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            23/04/18
+           Boss
           </MDTypography>
         ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
-            <VisibilityIcon></VisibilityIcon>
-          </MDTypography>
-        ),
+        // action: (
+        //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+        //     <VisibilityIcon></VisibilityIcon>
+        //   </MDTypography>
+        // ),
       },
+
       {
-        author: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
-        function: <Job title="Programator" description="Developer" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            11/01/19
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
-           <VisibilityIcon></VisibilityIcon>
-          </MDTypography>
-        ),
-      },
-      {
-        author: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
+        author: <Author image={team4} name="Jose Alberto" email="josealberto@quantum.com" />,
         function: <Job title="Executive" description="Projects" />,
         status: (
           <MDBox ml={-1}>
@@ -109,17 +92,79 @@ export default function data() {
         ),
         employed: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            19/09/17
+           Boss
           </MDTypography>
         ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
-            <VisibilityIcon></VisibilityIcon>
-          </MDTypography>
-        ),
+        // action: (
+        //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+        //     <VisibilityIcon></VisibilityIcon>
+        //   </MDTypography>
+        // ),
       },
+
       {
-        author: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
+        author: <Author image={team3} name="Albert Mendoza" email="Albert@quantum.com" />,
+        function: <Job title="Administrator." description="Data base" />,
+        status: (
+          <MDBox ml={-1}>
+            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+          </MDBox>
+        ),
+        employed: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+           Boss
+          </MDTypography>
+        ),
+        // action: (
+        //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+        //    <VisibilityIcon></VisibilityIcon>
+        //   </MDTypography>
+        // ),
+      },
+
+      {
+        author: <Author image={team4} name="Jose Alberto" email="josealberto@quantum.com" />,
+        function: <Job title="Manager" description="Executive" />,
+        status: (
+          <MDBox ml={-1}>
+            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+          </MDBox>
+        ),
+        employed: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+           Boss
+          </MDTypography>
+        ),
+        // action: (
+        //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+        //     <VisibilityIcon></VisibilityIcon>
+        //   </MDTypography>
+        // ),
+      },
+
+      {
+        author: <Author image={team3} name="Reni Antonio" email="Reni@quantum.com" />,
+        function: <Job title="Digitizer." description="Description Project" />,
+        status: (
+          <MDBox ml={-1}>
+            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+          </MDBox>
+        ),
+        employed: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            Boss
+          </MDTypography>
+        ),
+        // action: (
+        //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+        //    <VisibilityIcon></VisibilityIcon>
+        //   </MDTypography>
+        // ),
+      },
+      //--------------------------------------------------------------------
+
+      {
+        author: <Author image={team2} name="Sander Peguero" email="sander@quantum.com" />,
         function: <Job title="Programator" description="Developer" />,
         status: (
           <MDBox ml={-1}>
@@ -128,52 +173,75 @@ export default function data() {
         ),
         employed: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            24/12/08
+            Boss
           </MDTypography>
         ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
-            <VisibilityIcon></VisibilityIcon>
-          </MDTypography>
-        ),
+        // action: (
+        //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+        //     <VisibilityIcon></VisibilityIcon>
+        //   </MDTypography>
+        // ),
       },
       {
-        author: <Author image={team3} name="Richard Gran" email="richard@creative-tim.com" />,
-        function: <Job title="Manager" description="Executive" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            04/10/21
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
-            <VisibilityIcon></VisibilityIcon>
-          </MDTypography>
-        ),
-      },
-      {
-        author: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
+        author: <Author image={team3} name="Albert Mendoza" email="Albert@quantum.com" />,
         function: <Job title="Programator" description="Developer" />,
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
+            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
         employed: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            14/09/20
+           Boss
           </MDTypography>
         ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
-            <VisibilityIcon></VisibilityIcon>
+        // action: (
+        //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+        //    <VisibilityIcon></VisibilityIcon>
+        //   </MDTypography>
+        // ),
+      },
+     
+     
+      {
+        author: <Author image={team3} name="Reni Antonio" email="Reni@quantum.com" />,
+        function: <Job title="Programator" description="Developer" />,
+        status: (
+          <MDBox ml={-1}>
+            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+          </MDBox>
+        ),
+        employed: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+          Boss
           </MDTypography>
         ),
+        // action: (
+        //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+        //     <VisibilityIcon></VisibilityIcon>
+        //   </MDTypography>
+        // ),
+      },
+
+     
+      {
+        author: <Author image={team4} name="Jose Alberto" email="josealberto@quantum.com" />,
+        function: <Job title="Programator" description="Developer" />,
+        status: (
+          <MDBox ml={-1}>
+            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+          </MDBox>
+        ),
+        employed: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+           Boss
+          </MDTypography>
+        ),
+        // action: (
+        //   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium" sx={{ fontSize: 20 }}>
+        //     <VisibilityIcon></VisibilityIcon>
+        //   </MDTypography>
+        // ),
       },
     ],
   };
